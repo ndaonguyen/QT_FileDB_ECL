@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skill_materials>
+	<skill_material>
+		<skill_id>25</skill_id>
+		<material_id>12</material_id>
+		<course_id>12</course_id>
+	</skill_material>
+	<skill_material>
+		<skill_id>25</skill_id>
+		<material_id>12</material_id>
+		<course_id>12</course_id>
+	</skill_material>
+	<skill_material>
+		<skill_id>25</skill_id>
+		<material_id>12</material_id>
+		<course_id>12</course_id>
+	</skill_material>
+</skill_materials>
+

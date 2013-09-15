@@ -1,30 +1,4 @@
-<?xml version="1.0" encoding="iso-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <classes>
-	<class>
-		<id>12</id>
-		<name>Nguyen ielts</name>
-		<course_id>215</course_id>
-		<registration_day>2013-09-03</registration_day>
-		<total_day>20</total_day>
-		<num_learning_day>1</num_learning_day>
-		<note></note>
-	</class>
-	<class>
-		<id>17</id>
-		<name>hung</name>
-		<course_id>213</course_id>
-		<registration_day>2013-09-03</registration_day>
-		<total_day>10</total_day>
-		<num_learning_day>3</num_learning_day>
-		<note></note>
-	</class>
-	<class>
-		<id>19</id>
-		<name>humanity</name>
-		<course_id>215</course_id>
-		<registration_day>2013-09-01</registration_day>
-		<total_day>20</total_day>
-		<num_learning_day>3</num_learning_day>
-		<note></note>
-	</class>
 </classes>
+

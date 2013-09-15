@@ -2,18 +2,15 @@
 #include "listCourseDialog.h"
 #include "database.h"
 
-listCourseDialog::listCourseDialog(QWidget *parent,databaseFile *dbFile, QString courseId)
+listCourseDialog::listCourseDialog(QWidget *parent, QString courseId)
 	: QDialog(parent)
 {
 	QVBoxLayout *topLeftLayout = new QVBoxLayout;
-/*
 	MYSQL* conn = database::connectByC();
+
 	MYSQL_RES* res_set = database::courseSkill_searchCourseId(conn,courseId);
 	MYSQL_ROW row;
 	while(row = mysql_fetch_row(res_set))
-*/
-	QList< QMap<QString,QString> > coSkList = dbFile->getListByField("course_skill", "course_id", courseId);
-	int numRow = coSkList.count();
 	{
 		QString skillID = row[1];
 		MYSQL_ROW skillRow =  database::skill_searchSkillId(conn,skillID);

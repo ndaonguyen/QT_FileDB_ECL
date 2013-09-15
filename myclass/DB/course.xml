@@ -1,28 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <courses>
-  <course>
-    <id>12</id>
-    <name>Nguyen ielts</name>
-  </course>
-  <course>
-    <id>11</id>
-    <name>Nguyen ielts</name>
-  </course>
-  <course>
-    <id>13</id>
-    <name>Nguyen ielts</name>
-  </course>
-  <course>
-    <id>18</id>
-    <name>Nguyen ielts</name>
-  </course>
-  <course>
-    <id>14</id>
-    <name>Nguyen ielts</name>
-  </course>
-  <course>
-    <id>19</id>
-    <name>Nguyen ielts</name>
-  </course>
- </courses>
-  
+	<course>
+		<id>1</id>
+		<name>ielts</name>
+	</course>
+	<course>
+		<id>2</id>
+		<name>toelf</name>
+	</course>
+	<course>
+		<id>3</id>
+		<name>toeic</name>
+	</course>
+</courses>
+

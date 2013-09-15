@@ -14,14 +14,35 @@ public:
 	QFile* getFile(QString table,QString mode);
 	bool isNumber(QString strCheck);
 	QList<QString> getDbStructure(QString table);
-	QList< QMap<QString,QString> > getDbBrowse(QString table);
+	
+	void replaceItemDbBrowse(QString table,int index,QMap<QString,QString> item );
+	void removeItemsDbBrowse(QString table,int index);
+
 	bool isItemExist(QList<QString> listCheck, QString value );
+	void appendItem(QString table, QMap<QString,QString> item);
+	int indexSearchItem(QString table,QMap<QString,QString> item);
+	QList<int> indexSearchField(QString table,QString field, QString fieldValue);
 
 	QList< QMap<QString,QString> > readFile(QString table); // name of table
-	QMap<QString,QString>parseEach(QString table,QXmlStreamReader& xml);
+	QMap<QString,QString> parseEach(QString table,QXmlStreamReader& xml);
 	void writeFile(QString table,QList< QMap<QString,QString> > listInfo);
-	QMap<QString,QString> searchMax(QString table, QString field);
+	
+	//Save
 	QMap<QString,QString> insertItemWithKeyId(QString table, QList<QString> infoInsert);
+	QMap<QString,QString> insertItemWithoutKeyId(QString table, QList<QString> infoInsert);
+	
+	QMap<QString,QString> searchMax(QString table, QString field);
+	QList< QMap<QString,QString> > getAll(QString table);
+	QList< QMap<QString,QString> > getListByField(QString table, QString field, QString fieldValue);
+	QList< QMap<QString,QString> > getListByFields(QString table, QList<QString> fields, QList<QString> fieldValues);
+	QList< QMap<QString,QString> > getListByPartValue(QString table, QString field, QString partValue);
+
+	//Edit a id by searching another id
+	void editOneFieldById(QString table,QString fieldSearch, QString fieldValue, QString fieldReplace, QString valueReplace);
+	void editById(QString table, QString idValue ,QList<QString> listInfo); // edit with table have key ( ex: id,...)
+
+	//Delete
+	void deleteByField(QString table, QString field, QString fieldValue);
 public:
 	// list of db structure
 	QList<QString> dbClass;
@@ -44,13 +65,4 @@ public:
 	QList< QMap<QString,QString> > memberList;
 	QList< QMap<QString,QString> > skillList;
 	QList< QMap<QString,QString> > skillMaterialList;
-
-	bool isClassEdit;
-	bool isClassMemberEdit;
-	bool isCourseEdit;
-	bool isCourseSkillEdit;
-	bool isMaterialEdit;
-	bool isMaterialUseEdit;
-	bool isSkill;
-	bool isSkillMaterial;
 };

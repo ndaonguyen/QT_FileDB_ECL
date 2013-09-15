@@ -1,31 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <class_members>
-	<class_member>
-		<class_id>12</class_id>
-		<member_id>25</member_id>
-	</class_member>
-	<class_member>
-		<class_id>17</class_id>
-		<member_id>39</member_id>
-	</class_member>
-	<class_member>
-		<class_id>17</class_id>
-		<member_id>40</member_id>
-	</class_member>
-	<class_member>
-		<class_id>19</class_id>
-		<member_id>44</member_id>
-	</class_member>
-	<class_member>
-		<class_id>17</class_id>
-		<member_id>48</member_id>
-	</class_member>
-	<class_member>
-		<class_id>12</class_id>
-		<member_id>62</member_id>
-	</class_member>
-		<class_member>
-		<class_id>12</class_id>
-		<member_id>63</member_id>
-	</class_member>
 </class_members>
+

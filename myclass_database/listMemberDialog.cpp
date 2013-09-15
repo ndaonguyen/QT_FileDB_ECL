@@ -4,11 +4,10 @@
 
 listMemberDialog::listMemberDialog(QWidget *parent,QString classId)
 {
-//	databaseFile *dbFile = new databaseFile();
-//	QList< QMap<QString,QString> > infoRead = dbFile->readFile(tr("course"));
-//	dbFile->writeFile("course",infoRead);
-//	dbFile->searchMax("course", "id");
-//	dbFile->editOneIdByOtherId("member","id", "2", "birth_year", "2000");
+	databaseFile *dbFile = new databaseFile();
+	QList< QMap<QString,QString> > infoRead = dbFile->readFile(tr("course"));
+	dbFile->writeFile("course",infoRead);
+	dbFile->searchMax("course", "id");
 
 	conn = database::connectByC();
 	QVBoxLayout *topLeftLayout = new QVBoxLayout;

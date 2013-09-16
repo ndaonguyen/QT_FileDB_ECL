@@ -2,15 +2,11 @@
 <courses>
 	<course>
 		<id>1</id>
-		<name>ielts</name>
+		<name>ietls</name>
 	</course>
 	<course>
 		<id>2</id>
-		<name>toelf</name>
-	</course>
-	<course>
-		<id>3</id>
-		<name>toeic</name>
+		<name>ielts</name>
 	</course>
 </courses>
 

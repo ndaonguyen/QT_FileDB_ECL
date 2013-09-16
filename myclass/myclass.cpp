@@ -1,8 +1,5 @@
 #include "myclass.h"
 
-
-
-
 MyClass::MyClass(QWidget *parent, Qt::WFlags flags)
 	: QMainWindow(parent, flags)
 {
@@ -13,9 +10,9 @@ MyClass::MyClass(QWidget *parent, Qt::WFlags flags)
 	loadListCourseTab();
 	loadOriginConfig();
 
-//	loadConfigClass();
-//	loadDataAddClassTab(0);
-//	loadListClassTab();
+	loadConfigClass();
+	loadDataAddClassTab(0);
+	loadListClassTab();
 }
 
 MyClass::~MyClass()

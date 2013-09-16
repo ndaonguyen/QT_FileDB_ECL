@@ -1,4 +1,6 @@
 #pragma once
+#include "databaseFile.h"
+
 
 class QLabel;
 class QListWidget;

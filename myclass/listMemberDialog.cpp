@@ -2,15 +2,10 @@
 #include "listMemberDialog.h"
 
 
-listMemberDialog::listMemberDialog(QWidget *parent,QString classId)
+listMemberDialog::listMemberDialog(QWidget *parent,databaseFile *dbFileTransfer,QString classId)
 {
-//	databaseFile *dbFile = new databaseFile();
-//	QList< QMap<QString,QString> > infoRead = dbFile->readFile(tr("course"));
-//	dbFile->writeFile("course",infoRead);
-//	dbFile->searchMax("course", "id");
-//	dbFile->editOneIdByOtherId("member","id", "2", "birth_year", "2000");
-
-	conn = database::connectByC();
+//	conn = database::connectByC();
+	dbFile = dbFileTransfer;
 	QVBoxLayout *topLeftLayout = new QVBoxLayout;
 
 	view  = new QTableView(this);
@@ -33,16 +28,21 @@ listMemberDialog::listMemberDialog(QWidget *parent,QString classId)
 	topLeftLayout->addWidget(label);
 	int rowCurrent = 0;
 
-	MYSQL_RES *res = database::classMember_searchClassId(conn,classId);
-	while(MYSQL_ROW classMemberRow = mysql_fetch_row(res))
+//	MYSQL_RES *res = database::classMember_searchClassId(conn,classId);
+//	while(MYSQL_ROW classMemberRow = mysql_fetch_row(res))
+	QList< QMap<String,QString> > res = dbFile->getListByField("class_member","class_id",classId);
+	int numClassMember = res.count();
+	for(int i = 0;i<numClassMember;i++)
 	{
-		QString memberId   = classMemberRow[1];
-		MYSQL_ROW memberRow = database::member_searchMemberId(conn,memberId);
+	//	QString memberId   = classMemberRow[1];
+		QString memberId    = res.at(i)["member_id"];
+		QList< QMap<String,QString> > memberRow = dbFile->getListByField("member","id",memberId);
+//		MYSQL_ROW memberRow = database::member_searchMemberId(conn,memberId);
 		
-		model->setItem(rowCurrent, 0, new QStandardItem(memberRow[0]));
-		model->setItem(rowCurrent, 1, new QStandardItem(memberRow[1]));
-		model->setItem(rowCurrent, 2, new QStandardItem(memberRow[2]));
-		model->setItem(rowCurrent, 3, new QStandardItem(memberRow[3]));
+		model->setItem(rowCurrent, 0, new QStandardItem(memberRow.at(0)["id"]));
+		model->setItem(rowCurrent, 1, new QStandardItem(memberRow.at(0)["name"]));
+		model->setItem(rowCurrent, 2, new QStandardItem(memberRow.at(0)["birth_year"]));
+		model->setItem(rowCurrent, 3, new QStandardItem(memberRow.at(0)["note"]));
 
 		QPushButton *button = new QPushButton("");
 		QIcon ButtonIcon2;
@@ -89,6 +89,4 @@ listMemberDialog::listMemberDialog(QWidget *parent,QString classId)
 
 listMemberDialog::~listMemberDialog(void)
 {
-	database::closeConnectionC(conn);
 }
-//#include "GeneratedFiles/Debug/moc_listMemberDialog.cpp"

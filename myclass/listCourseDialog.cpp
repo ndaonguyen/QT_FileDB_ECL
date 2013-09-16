@@ -1,36 +1,38 @@
 #include <QtGui>
 #include "listCourseDialog.h"
-#include "database.h"
 
 listCourseDialog::listCourseDialog(QWidget *parent,databaseFile *dbFile, QString courseId)
 	: QDialog(parent)
 {
 	QVBoxLayout *topLeftLayout = new QVBoxLayout;
-/*
-	MYSQL* conn = database::connectByC();
-	MYSQL_RES* res_set = database::courseSkill_searchCourseId(conn,courseId);
-	MYSQL_ROW row;
-	while(row = mysql_fetch_row(res_set))
-*/
 	QList< QMap<QString,QString> > coSkList = dbFile->getListByField("course_skill", "course_id", courseId);
 	int numRow = coSkList.count();
+	if(numRow >0)
 	{
-		QString skillID = row[1];
-		MYSQL_ROW skillRow =  database::skill_searchSkillId(conn,skillID);
-		QString skillName = skillRow[1];
-		QLabel *skill = new QLabel("<b>"+skillName+"</b>");
-		topLeftLayout->addWidget(skill);
-		
-		MYSQL_RES* result = database::skillMaterial_searchSkillId(conn,skillID,courseId); 
-		MYSQL_ROW materialRow;
-		QListWidget *materialList = new QListWidget();
-		while(materialRow = mysql_fetch_row(result))
+		for(int i=0;i<numRow;i++)
 		{
-			QString matId = materialRow[1];
-			MYSQL_ROW materialData = database::material_searchMaterialId(conn,matId);
-			materialList->addItem(materialData[1]);
+			QString skillID   = coSkList.at(i)["skill_id"];
+			QList< QMap<QString,QString> > skillList = dbFile->getListByField("skill", "id",skillID);
+			QString skillName = skillList.at(0)["name"];
+			QLabel *skill = new QLabel("<b>"+skillName+"</b>");
+			topLeftLayout->addWidget(skill);
+			
+			QList<QString> fields;
+			QList<QString> fieldValues;
+			fields << "skill_id" << "course_id";
+			fieldValues << skillID << courseId;
+
+			QList< QMap<QString,QString> > skMaList = dbFile->getListByFields("skill_material",fields, fieldValues);
+			QListWidget *materialList = new QListWidget();
+			int numSkMa = skMaList.count();
+			for(int i =0;i<numSkMa;i++)
+			{
+				QString matId = skMaList.at(i)["material_id"];
+				QList< QMap<QString,QString> > matList = dbFile->getListByField("material", "id", matId );
+				materialList->addItem(matList.at(0)["name"]);
+			}
+			topLeftLayout->addWidget(materialList);
 		}
-		topLeftLayout->addWidget(materialList);
 	}
 	setLayout(topLeftLayout);
 	setWindowTitle(tr("Material list"));

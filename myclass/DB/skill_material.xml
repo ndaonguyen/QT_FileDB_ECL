@@ -25,5 +25,55 @@
 		<material_id>5</material_id>
 		<course_id>1</course_id>
 	</skill_material>
+	<skill_material>
+		<skill_id>3</skill_id>
+		<material_id>6</material_id>
+		<course_id>3</course_id>
+	</skill_material>
+	<skill_material>
+		<skill_id>3</skill_id>
+		<material_id>7</material_id>
+		<course_id>3</course_id>
+	</skill_material>
+	<skill_material>
+		<skill_id>3</skill_id>
+		<material_id>8</material_id>
+		<course_id>3</course_id>
+	</skill_material>
+	<skill_material>
+		<skill_id>4</skill_id>
+		<material_id>9</material_id>
+		<course_id>3</course_id>
+	</skill_material>
+	<skill_material>
+		<skill_id>4</skill_id>
+		<material_id>10</material_id>
+		<course_id>3</course_id>
+	</skill_material>
+	<skill_material>
+		<skill_id>1</skill_id>
+		<material_id>11</material_id>
+		<course_id>2</course_id>
+	</skill_material>
+	<skill_material>
+		<skill_id>1</skill_id>
+		<material_id>12</material_id>
+		<course_id>2</course_id>
+	</skill_material>
+	<skill_material>
+		<skill_id>2</skill_id>
+		<material_id>13</material_id>
+		<course_id>2</course_id>
+	</skill_material>
+	<skill_material>
+		<skill_id>3</skill_id>
+		<material_id>14</material_id>
+		<course_id>2</course_id>
+	</skill_material>
+	<skill_material>
+		<skill_id>3</skill_id>
+		<material_id>15</material_id>
+		<course_id>2</course_id>
+	</skill_material>
 </skill_materials>
 

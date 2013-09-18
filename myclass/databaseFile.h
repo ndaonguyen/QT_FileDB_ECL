@@ -36,6 +36,8 @@ public:
 	QList< QMap<QString,QString> > getListByField(QString table, QString field, QString fieldValue);
 	QList< QMap<QString,QString> > getListByFields(QString table, QList<QString> fields, QList<QString> fieldValues);
 	QList< QMap<QString,QString> > getListByPartValue(QString table, QString field, QString partValue);
+	QList< QMap<QString,QString> > getListByFieldGroupByField(QString table, QString field, QString fieldValue, QString fieldGroup);
+
 
 	//Edit a id by searching another id
 	void editOneFieldById(QString table,QString fieldSearch, QString fieldValue, QString fieldReplace, QString valueReplace);

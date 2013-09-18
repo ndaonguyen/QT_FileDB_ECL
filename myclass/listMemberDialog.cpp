@@ -4,7 +4,6 @@
 
 listMemberDialog::listMemberDialog(QWidget *parent,databaseFile *dbFileTransfer,QString classId)
 {
-//	conn = database::connectByC();
 	dbFile = dbFileTransfer;
 	QVBoxLayout *topLeftLayout = new QVBoxLayout;
 
@@ -28,16 +27,12 @@ listMemberDialog::listMemberDialog(QWidget *parent,databaseFile *dbFileTransfer,
 	topLeftLayout->addWidget(label);
 	int rowCurrent = 0;
 
-//	MYSQL_RES *res = database::classMember_searchClassId(conn,classId);
-//	while(MYSQL_ROW classMemberRow = mysql_fetch_row(res))
-	QList< QMap<String,QString> > res = dbFile->getListByField("class_member","class_id",classId);
+	QList< QMap<QString,QString> > res = dbFile->getListByField("class_member","class_id",classId);
 	int numClassMember = res.count();
 	for(int i = 0;i<numClassMember;i++)
 	{
-	//	QString memberId   = classMemberRow[1];
 		QString memberId    = res.at(i)["member_id"];
-		QList< QMap<String,QString> > memberRow = dbFile->getListByField("member","id",memberId);
-//		MYSQL_ROW memberRow = database::member_searchMemberId(conn,memberId);
+		QList< QMap<QString,QString> > memberRow = dbFile->getListByField("member","id",memberId);
 		
 		model->setItem(rowCurrent, 0, new QStandardItem(memberRow.at(0)["id"]));
 		model->setItem(rowCurrent, 1, new QStandardItem(memberRow.at(0)["name"]));

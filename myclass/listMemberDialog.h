@@ -3,6 +3,7 @@
 #include "databaseFile.h"
 #include <QSignalMapper>
 #include <QStandardItemModel>
+#include <QMessageBox>
 
 class QLabel;
 class QPushButton;
@@ -31,7 +32,6 @@ public:
 	}
 private:
 	int numOldMemberInDialog;  // tong so luong member cu con ton tai trong list
-	MYSQL *conn;
 	QLabel *label;
 	QList<QString> listMemberIdDelete;
 	QPushButton *saveButton;
@@ -42,8 +42,6 @@ private:
 	private slots:
 		void deleteMemberAction(QString memberId)
 		{
-//			MYSQL_ROW memberRow = database::member_searchMemberId(conn,memberId);
-//			QString memberName  = memberRow[1];
 			QList< QMap<QString,QString> > memberRow = dbFile->getListByField("member", "id", memberId);
 			QString memberName  = memberRow.at(0)["name"];
 			int rowCount = model->rowCount();
@@ -73,16 +71,14 @@ private:
 				}
 				QString memId = model->data(model->index(r,0),Qt::DisplayRole).toString();
 				dbFile->editById("member",memId,memberInfo);
-//				database::member_editById(conn,memId,memberInfo);
 				memberInfo.clear();
 			}
 			//delete
 			int numDelete = listMemberIdDelete.count();
 			for(int i =0;i<numDelete;i++)
 			{
-//				database::classMember_deleteByMemberId(conn,listMemberIdDelete.at(i));
-//				database::member_deleteById(conn, listMemberIdDelete.at(i));
-
+				dbFile->deleteByField("class_member","member_id",listMemberIdDelete.at(i));
+				dbFile->deleteByField("member","id",listMemberIdDelete.at(i));
 			}
 			//save new data
 			QList<QString> memberInfoList;
@@ -100,8 +96,12 @@ private:
 					}
 					QString note = model->data(model->index(i,3),Qt::DisplayRole).toString().trimmed();
 					memberInfoList << memberName << birthYear << note;
-					int memberId = database::member_saveAction(conn,memberInfoList);
-					database::classMember_saveAction(conn,classId,QString::number(memberId));
+					
+					QMap<QString,QString> memberInsert = dbFile->insertItemWithKeyId("member",memberInfoList);
+					QList<QString> classMemberList;
+					classMemberList << classId << memberInsert["id"];
+					dbFile->insertItemWithoutKeyId("class_member",classMemberList);
+					
 					memberInfoList.clear();
 				}
 			}

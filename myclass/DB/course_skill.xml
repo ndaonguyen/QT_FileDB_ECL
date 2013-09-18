@@ -32,5 +32,13 @@
 		<course_id>2</course_id>
 		<skill_id>4</skill_id>
 	</course_skill>
+	<course_skill>
+		<course_id>3</course_id>
+		<skill_id>3</skill_id>
+	</course_skill>
+	<course_skill>
+		<course_id>3</course_id>
+		<skill_id>4</skill_id>
+	</course_skill>
 </course_skills>
 

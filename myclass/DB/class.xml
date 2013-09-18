@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classes>
+	<class>
+		<id>1</id>
+		<name>Nguyen test</name>
+		<course_id>1</course_id>
+		<registration_day>2013-09-18</registration_day>
+		<total_day>20</total_day>
+		<num_learning_day>0</num_learning_day>
+		<note></note>
+	</class>
+	<class>
+		<id>2</id>
+		<name>Hung ielts</name>
+		<course_id>3</course_id>
+		<registration_day>2013-09-18</registration_day>
+		<total_day>30</total_day>
+		<num_learning_day>0</num_learning_day>
+		<note></note>
+	</class>
+</classes>
+

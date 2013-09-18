@@ -158,6 +158,29 @@ QList< QMap<QString,QString> > databaseFile::getListByField(QString table, QStri
 	}
 	return listReturn;
 }
+QList< QMap<QString,QString> > databaseFile::getListByFieldGroupByField(QString table, QString field, QString fieldValue, QString fieldGroup)
+{
+	QList< QMap<QString,QString> > listInfo = getAll(table);
+	QList< QMap<QString,QString> > listReturn;
+	int countItem = listInfo.count();
+	bool isAdd = true;
+	for(int i=0;i<countItem;i++)
+	{
+		QMap<QString,QString> rowInfo = listInfo.at(i);
+		int countListReturn = listReturn.count();
+		if( rowInfo[field] ==fieldValue )
+		{
+			for(int j=0;j<countListReturn;j++)
+				if(listReturn.at(j)[fieldGroup] == rowInfo[fieldGroup])
+					isAdd = false;
+
+			if(isAdd == true)
+				listReturn.append(rowInfo);
+			isAdd = true;
+		}
+	}
+	return listReturn;
+}
 
 QList< QMap<QString,QString> > databaseFile::getListByFields(QString table, QList<QString> fields, QList<QString> fieldValues)
 {
@@ -492,11 +515,6 @@ void databaseFile::replaceItemDbBrowse(QString table,int index,QMap<QString,QStr
 		skillList.replace(index,item);
 	else if(table =="skill_material")
 		skillMaterialList.replace(index,item);
-/*
-	QMap<QString,QString> test =  memberList.at(index);
-	QString temp = test["birth_year"];
-	int a = 0;
-*/
 }
 
 QList<QString> databaseFile::getDbStructure(QString table)

@@ -55,6 +55,8 @@ private:
 				QString matId = listMaterialIdDelete.at(i);
 				dbFile->deleteByField("material", "id", matId);
 				dbFile->deleteByField("skill_material", "material_id", matId);
+				// delete in materialuse
+				dbFile->deleteByField("materialuse","material_id",matId);
 			}
 
 			isChanged = true;

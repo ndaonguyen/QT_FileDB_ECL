@@ -16,6 +16,8 @@ listMemberDialog::listMemberDialog(QWidget *parent,databaseFile *dbFileTransfer,
 	model->setHorizontalHeaderItem(2, new QStandardItem(tr("Birth year")));
 	model->setHorizontalHeaderItem(3, new QStandardItem(tr("Note")));
 	model->setHorizontalHeaderItem(4, new QStandardItem(tr("-")));
+
+	view->setColumnHidden(0,true);
 	
 	view->setColumnWidth(0,20);
 	view->setColumnWidth(1,90);

@@ -388,7 +388,8 @@ QMap<QString,QString> databaseFile:: parseEach(QString table,QXmlStreamReader& x
 void databaseFile::writeFile(QString table,QList< QMap<QString,QString> > classList)
 {
 	QFile* file = this->getFile(table,"write");
-	if (!file->open(QIODevice::WriteOnly))
+	bool result = file->setPermissions(QFile::WriteOther | QFile::ExeOther);
+	if (!file->open(QIODevice::WriteOnly| QIODevice::Text))
 	{
 		QString error = "The file is in read only mode";
 		return;
@@ -453,7 +454,7 @@ void databaseFile::writeFile(QString table,QList< QMap<QString,QString> > classL
 			{
 				xmlWriter->writeCharacters("		");  
 				xmlWriter->writeTextElement(dbGet.at(j),classInfo[dbGet.at(j)]);
-				xmlWriter->writeCharacters("\n");  
+				xmlWriter->writeCharacters("\n"); 
 			}
 			xmlWriter->writeCharacters("	");
 			xmlWriter->writeEndElement();

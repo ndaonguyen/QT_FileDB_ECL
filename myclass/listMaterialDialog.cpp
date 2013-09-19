@@ -23,6 +23,7 @@ listMaterialDialog::listMaterialDialog(QWidget *parent, databaseFile *dbFileTran
 		model->setHorizontalHeaderItem(2,new QStandardItem(tr("-")));
 		model->setHorizontalHeaderItem(1,new QStandardItem(tr("Material")));
 		model->setHorizontalHeaderItem(0,new QStandardItem(tr("Id")));
+		view->setColumnHidden(0,true);
 
 		QString skillId = skillList.at(0)["id"];
 		QString couId   = QString::number(courseId);

@@ -5,6 +5,16 @@
 #include <QMap>
 #include <QXmlStreamReader>
 #include <QFile>
+#include <QDir>
+#include <QMessageBox>
+
+#include <QtGui/QMainWindow>
+#include <QMessageBox>
+#include <QListWidgetItem>
+#include <QInputDialog>
+#include <QCheckBox>
+#include "ui_myclass.h"
+#include <QDialog>
 
 class databaseFile
 {

@@ -1,34 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <members>
-	<member>
-		<id>1</id>
-		<name>Hung</name>
-		<birth_year>1909</birth_year>
-		<note></note>
-	</member>
-	<member>
-		<id>2</id>
-		<name>Nguyen</name>
-		<birth_year>9888</birth_year>
-		<note></note>
-	</member>
-	<member>
-		<id>3</id>
-		<name>Phuong Cac</name>
-		<birth_year>1981</birth_year>
-		<note></note>
-	</member>
-	<member>
-		<id>4</id>
-		<name>Hung heo</name>
-		<birth_year>1985</birth_year>
-		<note></note>
-	</member>
-	<member>
-		<id>5</id>
-		<name>Chuong</name>
-		<birth_year>1999</birth_year>
-		<note></note>
-	</member>
 </members>
 

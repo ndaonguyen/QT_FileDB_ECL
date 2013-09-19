@@ -445,6 +445,7 @@ public:
 				QList<QString> headerList;
 				headerList << "ID" << "Material" << "Delete" ;
 				setHeaderTable(skillModel,headerList);
+				skillTable->setColumnHidden(0,true);
 				
 				QList< QMap<QString,QString> > skList = dbFile->getListByField("skill","id",coSkList.at(skillIndex)["skill_id"]);
 				QLabel *skillLabel = new QLabel(tr("<b>")+skList.at(0)["name"]+tr("</b>"));
@@ -502,6 +503,7 @@ public:
 				QList<QString> headerList;
 				headerList << "ID" << "Material" << "Delete" ;
 				setHeaderTable(skillModel,headerList);
+				skillTable->setColumnHidden(0,true);
 				
 				QList<QString> fies;
 				QList<QString> fiValues;
@@ -575,12 +577,17 @@ public:
 			dbFile->deleteByField("course_skill","course_id",courseId);
 		}
 		dbFile->deleteByField("course","id",courseId);
-	
+		// delete class use the course
+		dbFile->deleteByField("class","course_id",courseId);
+
 		// Delete row of QTableView
 		int rowCount = listCourseModel->rowCount();
 		for(int i =0; i < rowCount; i++)
 			if(nameCourse == listCourseModel->data(listCourseModel->index(i,0), Qt::DisplayRole).toString())
 				listCourseModel->removeRow(i);
+
+		//reload List Class
+		loadListClassTab();
 	}
 
 			/* STEP 1 - 2 : CLICK BUTTON1 SAVE */
@@ -912,13 +919,14 @@ public:
 
 			fields << "class_id" << "status";
 			fieldUseValues << resClass.at(rowCurrent)["id"] << "1";
-			fieldNotUseValues << resClass.at(rowCurrent)["id"] << "0";
 
+			QList< QMap<QString,QString> > allMat = dbFile->getListByField("materialuse","class_id",resClass.at(rowCurrent)["id"]);
 			QList< QMap<QString,QString> > useMat = dbFile->getListByFields("materialuse",fields,fieldUseValues);
-			QList< QMap<QString,QString> > notUseMat = dbFile->getListByFields("materialuse",fields,fieldNotUseValues);
 
-			int allMater = useMat.count();
-			int useMater = notUseMat.count();
+			int allMater = allMat.count();
+			int useMater = useMat.count();
+
+			QString idMU =  resClass.at(rowCurrent)["id"] ;
 
 			int percentMater = 0;
 			if(allMater!=0)
@@ -970,6 +978,7 @@ public:
 		ui.listClassTable->setColumnWidth(6,75);
 		ui.listClassTable->setColumnWidth(7,75);
 		ui.listClassTable->setColumnWidth(8,75);
+		ui.listClassTable->setColumnHidden(0,true);
 		// fill value
 		QList< QMap<QString,QString> > classList = dbFile->getAll("class");
 		fillListClass(classList);
@@ -1519,7 +1528,6 @@ public:
 				int numRow = skiMaList.count();
 				if(numRow>0)
 				{
-
 					for(int i=0; i <numRow; i++)
 					{
 						QString maId = skiMaList.at(i)["material_id"];
@@ -1558,6 +1566,8 @@ public:
 			refreshToOriginAddCourse();
 			// load course list
 			loadListCourseTab();
+			loadListClassTab();
+
 			ui.mainTab->setTabEnabled(0,true);
 			ui.mainTab->setTabEnabled(1,false);
 			ui.mainTab->setTabEnabled(2,true);
@@ -1645,7 +1655,7 @@ public:
 
 		void deleteCourseAction(QString courseId)
 		{
-			int ret = QMessageBox::warning(this, tr("Delete course"),tr("Please confirm !!"),
+			int ret = QMessageBox::warning(this, tr("Delete course"),tr("All classes use this course will also be deleted. Please confirm !!"),
                                 QMessageBox::Ok | QMessageBox::Cancel);
 
 			if(ret == QMessageBox::Ok)
@@ -1749,6 +1759,21 @@ public:
 		}
 
 // END: LIST CLASS TAB
+		
+		// main tab
+		void tabChangeAction(int index)
+		{
+			/*
+			if(index==0)
+			{
+				loadListClassTab();
+			}		
+			else if(index==2)
+			{
+				loadListCourseTab();
+			}
+			*/
+		}
 };
 
 #endif // MYCLASS_H

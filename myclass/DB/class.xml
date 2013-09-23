@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classes>
+	<class>
+		<id>1</id>
+		<name>Nguyen IETLS</name>
+		<course_id>1</course_id>
+		<registration_day>2013-09-23</registration_day>
+		<total_day>30</total_day>
+		<num_learning_day>0</num_learning_day>
+		<note>no no</note>
+	</class>
 </classes>
 

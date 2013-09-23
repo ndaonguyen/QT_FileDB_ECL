@@ -170,6 +170,7 @@ public:
 		}
 		return -1;
 	}
+
 	static MYSQL_RES* skill_getAll(MYSQL *connect)
 	{
 		QString query = "SELECT * FROM `english_course`.`skill`";
@@ -221,6 +222,7 @@ public:
 		}
 		return NULL;
 	}
+
 	static int skill_deleteById(MYSQL *connect, QString skillId)
 	{
 		QString query = "DELETE FROM `english_course`.`skill` WHERE `id` =" + skillId;
@@ -286,6 +288,7 @@ public:
 		}
 		return -1;
 	}
+
 	static int skillMaterial_deleteByMaterialId(MYSQL *connect, QString materialId)
 	{
 		QString query = "DELETE FROM `english_course`.`skill_material` WHERE `material_id` =" + materialId;
@@ -315,6 +318,7 @@ public:
 		}
 		return -1;
 	}
+
 	static int course_getMaxId(MYSQL *connect)
 	{
 		QString query = "SELECT MAX(id) FROM `english_course`.`course`";
@@ -331,6 +335,7 @@ public:
 		}
 		return -1;
 	}
+
 	static MYSQL_RES* course_getAll(MYSQL *connect)
 	{
 		QString query = "SELECT * FROM `english_course`.`course`";
@@ -379,6 +384,7 @@ public:
 		}
 		return NULL;
 	}
+
 	static int course_deleteBySkillId(MYSQL *connect, QString courseId)
 	{
 		QString query = "DELETE FROM `english_course`.`course` WHERE `id` =" + courseId;
@@ -410,6 +416,7 @@ public:
 		}
 		return NULL;
 	}
+
 	static int course_editById(MYSQL *connect, QString courseId, QString course)
 	{
 		QString query = "UPDATE `english_course`.`course` SET `name` = '"+course+"' WHERE `id` =" + courseId;
@@ -473,6 +480,7 @@ public:
 		}
 		return NULL;
 	}
+
 	static int courseSkill_deleteByCourseId(MYSQL *connect, QString courseId)
 	{
 		QString query = "DELETE FROM `english_course`.`course_skill` WHERE `course_id` =" + courseId;
@@ -496,6 +504,7 @@ public:
 		}
 		return -1;
 	}
+
 	// CLASS Table
 	static int class_saveAction(MYSQL *connect, QList<QString> listinfo)
 	{
@@ -513,6 +522,7 @@ public:
 		}
 		return -1;
 	}
+
 	static int class_getMaxId(MYSQL *connect)
 	{
 		QString query = "SELECT MAX(id) FROM `english_course`.`class`";
@@ -529,6 +539,7 @@ public:
 		}
 		return -1;
 	}
+
 	static MYSQL_ROW class_searchClassId(MYSQL *connect,QString classId)
 	{
 		MYSQL_RES *res_set;
@@ -545,6 +556,7 @@ public:
 		}
 		return NULL;
 	}
+
 	static MYSQL_RES* class_searchPartName(MYSQL *connect, QString namePart)
 	{
 		QString query = "SELECT * FROM `english_course`.`class` WHERE `name` LIKE '%"+namePart+"%'";
@@ -573,6 +585,7 @@ public:
 		}
 		return NULL;
 	}
+
 	static int class_editCourseIdById(MYSQL *connect, QString classId, QString courseId)
 	{
 		QString query = "UPDATE `english_course`.`class` SET `course_id` = "+courseId+" WHERE `id` =" + classId;
@@ -584,6 +597,7 @@ public:
 		}
 		return -1;
 	}
+
 	static int class_editById(MYSQL *connect, QString classId, QList<QString> classInfo)
 	{
 		QString query = "UPDATE `english_course`.`class` SET `name`='"+classInfo.at(0)+"', `course_id` = "+classInfo.at(1)+", `registration_day`= '"+classInfo.at(2)+"',`total_day` = '"+classInfo.at(3)+"', `num_learning_day` ='"+classInfo.at(4)+"', `note` ='"+classInfo.at(5)+"'  WHERE `id` =" + classId;
@@ -595,6 +609,7 @@ public:
 		}
 		return -1;
 	}
+
 	static int class_deleteById(MYSQL *connect, QString classId)
 	{
 		QString query = "DELETE FROM `english_course`.`class` WHERE `id` =" + classId;
@@ -606,6 +621,7 @@ public:
 		}
 		return -1;
 	}
+
 	//MEMBER table
 	static int member_saveAction(MYSQL *connect, QList<QString> listinfo)
 	{
@@ -622,6 +638,7 @@ public:
 		}
 		return -1;
 	}
+
 	static int member_getMaxId(MYSQL *connect)
 	{
 		QString query = "SELECT MAX(id) FROM `english_course`.`member`";
@@ -638,6 +655,7 @@ public:
 		}
 		return -1;
 	}
+
 	static MYSQL_ROW member_searchMemberId(MYSQL *connect,QString memberId)
 	{
 		MYSQL_RES *res_set;
@@ -666,6 +684,7 @@ public:
 		}
 		return -1;
 	}
+
 	static int member_deleteById(MYSQL *connect, QString memberId)
 	{
 		QString query = "DELETE FROM `english_course`.`member` WHERE `id` =" + memberId;
@@ -690,6 +709,7 @@ public:
 		}
 		return -1;
 	}
+
 	static MYSQL_RES* classMember_searchClassId(MYSQL *connect, QString classId)
 	{
 		MYSQL_RES *res_set;
@@ -704,6 +724,7 @@ public:
 		}
 		return NULL;
 	}
+
 	static int classMember_deleteByClassId(MYSQL *connect, QString classId)
 	{
 		QString query = "DELETE FROM `english_course`.`class_member` WHERE `class_id` =" + classId;
@@ -740,6 +761,7 @@ public:
 		}
 		return -1;
 	}
+
 	static MYSQL_RES* materialUse_searchByClassIdNSkillId(MYSQL *connect, QString classId, QString skillId)
 	{
 		MYSQL_RES *res_set;
@@ -754,6 +776,7 @@ public:
 		}
 		return NULL;
 	}
+
 	static MYSQL_ROW materialUse_searchMaterialClassId(MYSQL *connect, QString materialId, QString classId)
 	{
 		MYSQL_RES *res_set;
@@ -769,6 +792,7 @@ public:
 		}
 		return NULL;
 	}
+
 	static MYSQL_RES* materialUse_searchSkillByClassId(MYSQL *connect, QString classId)
 	{
 		MYSQL_RES *res_set;
@@ -797,6 +821,7 @@ public:
 		}
 		return -1;
 	}
+
 	static int materialUse_countUseMaterialByClassId(MYSQL *connect, QString classId)
 	{
 		QString query = "SELECT count(*) FROM `english_course`.`materialuse` where status =1 AND class_id ='"+classId+"'";
@@ -810,6 +835,7 @@ public:
 		}
 		return -1;
 	}
+
 	static int materialUse_deleteByClassId(MYSQL *connect, QString classId)
 	{
 		QString query = "DELETE FROM `english_course`.`materialuse` WHERE `class_id` =" + classId;

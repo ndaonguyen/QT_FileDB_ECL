@@ -36,6 +36,7 @@ databaseFile::~databaseFile(void)
 	writeFile("skill",skillList);
 	writeFile("skill_material",skillMaterialList);
 }
+
 /**
   * edit table with key : search by id and change rest info( except id)
   */
@@ -70,6 +71,7 @@ void databaseFile:: editOneFieldById(QString table,QString fieldSearch, QString 
 		replaceItemDbBrowse(table,index,item);
 	}
 }
+
 /**
   * for table without key ( like id)
   */
@@ -87,6 +89,7 @@ QMap<QString,QString> databaseFile:: insertItemWithoutKeyId(QString table, QList
 	}
 	return item;
 }
+
 QMap<QString,QString> databaseFile:: insertItemWithKeyId(QString table, QList<QString> infoInsert) // id is key ( increase each time)
 {
 	QList<QString> dbGet = getDbStructure(table);
@@ -145,6 +148,7 @@ QMap<QString,QString> databaseFile::searchMax(QString table, QString field)
 	}
 	return itemReturn;
 }
+
 QList< QMap<QString,QString> > databaseFile::getListByField(QString table, QString field, QString fieldValue)
 {
 	QList< QMap<QString,QString> > listInfo = getAll(table);
@@ -158,6 +162,7 @@ QList< QMap<QString,QString> > databaseFile::getListByField(QString table, QStri
 	}
 	return listReturn;
 }
+
 QList< QMap<QString,QString> > databaseFile::getListByFieldGroupByField(QString table, QString field, QString fieldValue, QString fieldGroup)
 {
 	QList< QMap<QString,QString> > listInfo = getAll(table);
@@ -469,6 +474,7 @@ void databaseFile::writeFile(QString table,QList< QMap<QString,QString> > classL
 	}
 	
 }
+
 QList<int>databaseFile::indexSearchField(QString table,QString field, QString fieldValue)
 {
 	QList< QMap<QString,QString> > listInfo = getAll(table);
@@ -482,6 +488,7 @@ QList<int>databaseFile::indexSearchField(QString table,QString field, QString fi
 	}
 	return listIndex;
 }
+
 int databaseFile::indexSearchItem(QString table,QMap<QString,QString> item)
 {
 	QList< QMap<QString,QString> > listInfo = getAll(table);
@@ -541,6 +548,7 @@ QList<QString> databaseFile::getDbStructure(QString table)
 		dbGet	 = dbSkillMaterial;
 	return dbGet;
 }
+
 QList< QMap<QString,QString> > databaseFile::getAll(QString table)
 {
 	QList< QMap<QString,QString> > listInfo;
@@ -564,6 +572,7 @@ QList< QMap<QString,QString> > databaseFile::getAll(QString table)
 		listInfo = skillMaterialList;
 	return listInfo;
 }
+
 bool databaseFile::isItemExist(QList<QString> listCheck, QString value )
 {
 	bool isExist = false;
@@ -578,6 +587,7 @@ bool databaseFile::isItemExist(QList<QString> listCheck, QString value )
 	}
 	return isExist;
 }
+
 void databaseFile::appendItem(QString table, QMap<QString,QString> item)
 {
 	if(table =="class")

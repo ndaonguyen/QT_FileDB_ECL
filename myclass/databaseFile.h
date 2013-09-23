@@ -28,19 +28,22 @@ public:
 	void replaceItemDbBrowse(QString table,int index,QMap<QString,QString> item );
 	void removeItemsDbBrowse(QString table,int index);
 
+// SUPPORTING function
 	bool isItemExist(QList<QString> listCheck, QString value );
 	void appendItem(QString table, QMap<QString,QString> item);
 	int indexSearchItem(QString table,QMap<QString,QString> item);
 	QList<int> indexSearchField(QString table,QString field, QString fieldValue);
 
+// FILE function
 	QList< QMap<QString,QString> > readFile(QString table); // name of table
 	QMap<QString,QString> parseEach(QString table,QXmlStreamReader& xml);
 	void writeFile(QString table,QList< QMap<QString,QString> > listInfo);
 	
-	//Save
+//Save
 	QMap<QString,QString> insertItemWithKeyId(QString table, QList<QString> infoInsert);
 	QMap<QString,QString> insertItemWithoutKeyId(QString table, QList<QString> infoInsert);
-	
+
+// Get data
 	QMap<QString,QString> searchMax(QString table, QString field);
 	QList< QMap<QString,QString> > getAll(QString table);
 	QList< QMap<QString,QString> > getListByField(QString table, QString field, QString fieldValue);
@@ -48,12 +51,11 @@ public:
 	QList< QMap<QString,QString> > getListByPartValue(QString table, QString field, QString partValue);
 	QList< QMap<QString,QString> > getListByFieldGroupByField(QString table, QString field, QString fieldValue, QString fieldGroup);
 
-
-	//Edit a id by searching another id
+//Edit
 	void editOneFieldById(QString table,QString fieldSearch, QString fieldValue, QString fieldReplace, QString valueReplace);
 	void editById(QString table, QString idValue ,QList<QString> listInfo); // edit with table have key ( ex: id,...)
 
-	//Delete
+//Delete
 	void deleteByField(QString table, QString field, QString fieldValue);
 public:
 	// list of db structure

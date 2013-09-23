@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <members>
+	<member>
+		<id>1</id>
+		<name>Hung</name>
+		<birth_year>1988</birth_year>
+		<note></note>
+	</member>
+	<member>
+		<id>2</id>
+		<name>Nguyen</name>
+		<birth_year>2000</birth_year>
+		<note></note>
+	</member>
 </members>
 

@@ -56,18 +56,30 @@ public:
 	bool isItemExist(QString item,QListWidget *list);
 	void clearItemsLayout(QLayout* layout);
 	void loadOriginConfig();
+	QPushButton* addActionButton(QString typeButton, QString mappingType, QString mappingData, QSignalMapper *mapper, bool isAddTextButton );
 // END COMMON
 
 // START : ADD CLASS TAB
 	// START ---- edit class
+	QList<QString> getMemIdInClass(int classiD);
+	void deleteMemberById(QString memberId);
 	void editMember();
 	void editCourse();
 	void editClass();
 	void addUseCheckBox(QString courseNameEdit,QString courseNameChoose);  // use for load course in edit class
-
+	void loadBasicInfoAddClassTab(QMap<QString,QString> classInfo);
+	void loadMemberAddClassTab(QString classIdStr);
+	void loadConfigEditInAddClassTab();
 	// END --- edit class
 	void loadConfigClass();
 	void loadDataAddClassTab(int classId);
+	void loadAddModeInAddClassTab();
+	
+	void setSizeMaterialBox(QTableView *skillTable );
+	bool checkCourseNew(QString courseCompare, int classiD );
+	void setSkillLabelInMaBox(QString skillId);
+	void fillMaterialForEachSkill(QList< QMap<QString,QString> > resMaterialUse, int skillIndex, 
+								  QTableView *skillTable, QStandardItemModel *skillModel);
 	void fillMaterial4AddMember(QString courseIdStr);
 // END   : ADD CLASS TAB
 

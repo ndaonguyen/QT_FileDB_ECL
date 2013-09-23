@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class_members>
 	<class_member>
-		<class_id>1</class_id>
-		<member_id>1</member_id>
-	</class_member>
-	<class_member>
-		<class_id>1</class_id>
-		<member_id>2</member_id>
-	</class_member>
-	<class_member>
 		<class_id>2</class_id>
 		<member_id>3</member_id>
 	</class_member>
@@ -19,6 +11,10 @@
 	<class_member>
 		<class_id>2</class_id>
 		<member_id>5</member_id>
+	</class_member>
+	<class_member>
+		<class_id>1</class_id>
+		<member_id>6</member_id>
 	</class_member>
 </class_members>
 

@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <members>
 	<member>
-		<id>1</id>
-		<name>Hung</name>
-		<birth_year>1988</birth_year>
-		<note></note>
-	</member>
-	<member>
-		<id>2</id>
-		<name>Nguyen</name>
-		<birth_year>2000</birth_year>
-		<note></note>
-	</member>
-	<member>
 		<id>3</id>
 		<name>Hung heo</name>
 		<birth_year>1985</birth_year>
@@ -28,6 +16,12 @@
 		<id>5</id>
 		<name>Lan</name>
 		<birth_year>1984</birth_year>
+		<note></note>
+	</member>
+	<member>
+		<id>6</id>
+		<name>Hung</name>
+		<birth_year>2000</birth_year>
 		<note></note>
 	</member>
 </members>

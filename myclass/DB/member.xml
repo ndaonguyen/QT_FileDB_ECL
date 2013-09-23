@@ -12,5 +12,23 @@
 		<birth_year>2000</birth_year>
 		<note></note>
 	</member>
+	<member>
+		<id>3</id>
+		<name>Hung heo</name>
+		<birth_year>1985</birth_year>
+		<note></note>
+	</member>
+	<member>
+		<id>4</id>
+		<name>Cac</name>
+		<birth_year>1981</birth_year>
+		<note></note>
+	</member>
+	<member>
+		<id>5</id>
+		<name>Lan</name>
+		<birth_year>1984</birth_year>
+		<note></note>
+	</member>
 </members>
 

@@ -18,7 +18,7 @@ MyClass::MyClass(QWidget *parent, Qt::WFlags flags)
 MyClass::~MyClass()
 {
 	delete dbFile;
-/*
+
 	delete listCourseModel;
 
 	int skillWidgetsCount = skillWidgets.count();
@@ -35,7 +35,7 @@ MyClass::~MyClass()
 	int skillTableListCount = skillTableList.count();
 	for(int i=0;i<skillTableListCount;i++)
 		delete skillTableList.at(i);
-*/
+
 }
 
 
@@ -571,10 +571,6 @@ void MyClass:: fillMaterial4AddMember(QString courseIdStr)
 			skillTableList.append(skillTable);
 			skillModelList.append(skillModel);
 			ui.courseInfoLayout->addWidget(skillTable);
-
-	//		delete skillTable;
-	//		delete skillModel;
-
 		}
 	}
 	else

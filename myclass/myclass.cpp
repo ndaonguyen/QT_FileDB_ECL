@@ -619,71 +619,56 @@ void MyClass:: fillMaterial4AddMember(QString courseIdStr)
 	bool isCourseEditMode = checkCourseNew(courseIdStr, classID );
 	QList< QMap<QString,QString> >  neededList;
 	QList<QString> headerList;
-	headerList << "ID" << "Material" << "Delete" ;
+	headerList << "ID" << "Material" << "Delete" ; //Header of each skill Box
 	QList<QString> fields;
 	QList<QString> fieldValues;
 	
-
 	if(isCourseEditMode == false) //load course  ( not in edit mode or in edit mode but new course)
 	{
 		neededList = dbFile->getListByField("course_skill","course_id",courseIdStr);
 		fields << "skill_id" << "course_id";
-
-		int numList = neededList.count();
-		for(int skillIndex = 0; skillIndex < numList ; skillIndex++)
-		{
-			QString skillId = neededList.at(skillIndex)["skill_id"];
-			setSkillLabelInMaBox(skillId);
-			
-			QTableView *skillTable = new QTableView(ui.addClassTab);
-			QStandardItemModel *skillModel = new QStandardItemModel(ui.addClassTab);
-			skillTable->setModel(skillModel);
-			
-			setHeaderTable(skillModel,headerList);
-			skillTable->setColumnHidden(0,true);
-
-			// QTableView of each skill
-			fieldValues.clear();
-			fieldValues << neededList.at(skillIndex)["skill_id"] << courseIdStr;
-			QList< QMap<QString,QString> > skMaList = dbFile->getListByFields("skill_material",fields,fieldValues);
-			fillMaterialForEachSkill(skMaList,skillIndex,skillTable,skillModel);
-
-			setSizeMaterialBox(skillTable );
-			skillIdList.append(skillId);
-			skillTableList.append(skillTable);
-			skillModelList.append(skillModel);
-			ui.courseInfoLayout->addWidget(skillTable);
-		}
 	}
 	else
 	{
 		neededList = dbFile->getListByFieldGroupByField("materialuse","class_id",
 																					 QString::number(classID),"skill_id");
 		fields << "class_id" << "skill_id";
-		int numList = neededList.count();
-		for(int skillIndex = 0;skillIndex<numList;skillIndex++)
+	}
+
+	int numList = neededList.count();
+	for(int skillIndex = 0; skillIndex < numList ; skillIndex++)
+	{
+		QString skillId = neededList.at(skillIndex)["skill_id"];
+		setSkillLabelInMaBox(skillId); // label skill
+		
+		//set header
+		QTableView *skillTable = new QTableView(ui.addClassTab);
+		QStandardItemModel *skillModel = new QStandardItemModel(ui.addClassTab);
+		skillTable->setModel(skillModel);
+		setHeaderTable(skillModel,headerList);
+		skillTable->setColumnHidden(0,true);
+
+		// Material of each skill 
+		QList< QMap<QString,QString> > resultTable;
+		fieldValues.clear();
+		if(isCourseEditMode == false) //load course  ( not in edit mode or in edit mode but new course)
 		{
-			QString skillId = neededList.at(skillIndex)["skill_id"];
-			setSkillLabelInMaBox(skillId);
-
-			QTableView *skillTable         = new QTableView(ui.addClassTab);
-			QStandardItemModel *skillModel = new QStandardItemModel(ui.addClassTab);
-			skillTable->setModel(skillModel);
-
-			setHeaderTable(skillModel,headerList);
-			skillTable->setColumnHidden(0,true);
-			
-			fieldValues.clear();
-			fieldValues << QString::number(classID) << skillId;
-			QList< QMap<QString,QString> > resMaterialUse = dbFile->getListByFields("materialuse",fields, fieldValues);
-			fillMaterialForEachSkill(resMaterialUse, skillIndex, skillTable, skillModel);
-
-			setSizeMaterialBox(skillTable );
-			skillIdList.append(skillId);
-			skillTableList.append(skillTable);
-			skillModelList.append(skillModel);
-			ui.courseInfoLayout->addWidget(skillTable);
+			fieldValues << neededList.at(skillIndex)["skill_id"] << courseIdStr;
+			resultTable = dbFile->getListByFields("skill_material",fields,fieldValues);
 		}
+		else
+		{
+			fieldValues << QString::number(classID) << skillId;
+			resultTable = dbFile->getListByFields("materialuse",fields, fieldValues);
+		}
+		fillMaterialForEachSkill(resultTable,skillIndex,skillTable,skillModel);
+		
+		// Add to suitable list
+		setSizeMaterialBox(skillTable );
+		skillIdList.append(skillId);
+		skillTableList.append(skillTable);
+		skillModelList.append(skillModel);
+		ui.courseInfoLayout->addWidget(skillTable);
 	}
 }
 

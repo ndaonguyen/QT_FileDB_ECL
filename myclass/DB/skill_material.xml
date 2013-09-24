@@ -110,5 +110,15 @@
 		<material_id>22</material_id>
 		<course_id>2</course_id>
 	</skill_material>
+	<skill_material>
+		<skill_id>4</skill_id>
+		<material_id>23</material_id>
+		<course_id>1</course_id>
+	</skill_material>
+	<skill_material>
+		<skill_id>4</skill_id>
+		<material_id>24</material_id>
+		<course_id>2</course_id>
+	</skill_material>
 </skill_materials>
 

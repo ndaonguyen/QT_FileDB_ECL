@@ -274,10 +274,10 @@ void MyClass::editMember()
 		deleteMemberById(exMemberIdList.at(j));
 }
 
-QList<QString> MyClass:: getMemIdInClass(int classiD)
+QList<QString> MyClass:: getMemIdInClass(int classId)
 {
 	QList< QMap<QString,QString> > resClassMember = dbFile->getListByField("class_member","class_id",
-																			QString::number(classID));
+																			QString::number(classId));
 	int countClassMember = resClassMember.count();
 	QList<QString> exMemberIdList;
 	for(int i=0;i<countClassMember;i++)
@@ -410,7 +410,7 @@ void MyClass:: loadConfigClass()
 	listClassModel = new QStandardItemModel(this); 
 	ui.listClassTable->setModel(listClassModel);
 
-	classID =0;
+	classID = ADD_MODE_CLASS;
 	ui.dayUseWidget->setVisible(false);
 }
 
@@ -441,11 +441,11 @@ void MyClass:: loadAddModeInAddClassTab()
 	QList<QString> headerList;
 	headerList << "Name" << "Birth year" << "Others";
 	setHeaderTable(addMemberModel, headerList);
-	setEmptyRowTable(addMemberModel,10);
+	setEmptyRowTable(addMemberModel,NUM_MEM_EMPTY);
 
-	ui.addMemberTable->setColumnWidth(0,110);
-	ui.addMemberTable->setColumnWidth(1,60);
-	ui.addMemberTable->setColumnWidth(2,40);
+	ui.addMemberTable->setColumnWidth(0,ADD_MEM_COL_1);
+	ui.addMemberTable->setColumnWidth(1,ADD_MEM_COL_2);
+	ui.addMemberTable->setColumnWidth(2,ADD_MEM_COL_3);
 
 	ui.classComboBox->addItem(tr("Choose course"));
 
@@ -489,8 +489,8 @@ void MyClass:: loadConfigEditInAddClassTab()
 
 	addMemberModel->setHorizontalHeaderItem(3, new QStandardItem(tr("Delete")));
 	addMemberModel->setHorizontalHeaderItem(4, new QStandardItem(tr("ID")));
-	ui.addMemberTable->setColumnWidth(3,50);
-	ui.addMemberTable->setColumnWidth(4,30);
+	ui.addMemberTable->setColumnWidth(3,ADD_MEM_COL_4);
+	ui.addMemberTable->setColumnWidth(4,ADD_MEM_COL_5);
 	ui.addMemberTable->setColumnHidden(4,true);
 }
 
@@ -631,7 +631,7 @@ void MyClass:: fillMaterial4AddMember(QString courseIdStr)
 	else
 	{
 		neededList = dbFile->getListByFieldGroupByField("materialuse","class_id",
-																					 QString::number(classID),"skill_id");
+														QString::number(classID),"skill_id");
 		fields << "class_id" << "skill_id";
 	}
 
@@ -709,8 +709,7 @@ void MyClass:: deleteCourse(QString courseId) // delete course base on course id
 		if(nameCourse == listCourseModel->data(listCourseModel->index(i,0), Qt::DisplayRole).toString())
 			listCourseModel->removeRow(i);
 
-	//reload List Class
-	loadListClassTab();
+	loadListClassTab(); //reload List Class
 }
 
 /**
@@ -718,7 +717,7 @@ void MyClass:: deleteCourse(QString courseId) // delete course base on course id
   */
 void MyClass:: fillSkillsStep2() //edit + create
 {
-	if(courseMode == "CREATE")
+	if( courseMode == CREATE_COURSE_MODE)
 	{
 		// update info to ListWidget of step 2	
 		QList< QMap<QString,QString> > skillList = dbFile->getAll("skill");
@@ -726,7 +725,7 @@ void MyClass:: fillSkillsStep2() //edit + create
 		for(int i = 0 ; i < numSkill; i++)
 			ui.leftWidget->addItem(skillList.at(i)["name"]);
 	}
-	else
+	else if( courseMode == EDIT_COURSE_MODE)
 	{
 		QList< QMap<QString,QString> > coSkList = dbFile->getListByField("course_skill","course_id", 
 																		QString::number(courseID));
@@ -735,11 +734,11 @@ void MyClass:: fillSkillsStep2() //edit + create
 		{
 			QMap<QString,QString> coSkRow = coSkList.at(i);
 			QList< QMap<QString,QString> > skillList = dbFile->getListByField("skill","id",coSkRow["skill_id"]);
-			if(skillList.count()>0)
-			{	
-				QMap<QString,QString> skill = skillList.at(0);
-				ui.rightWidget->addItem(skill["name"]);
-			}
+			if(skillList.count()<=0)
+				break;
+
+			QMap<QString,QString> skill = skillList.at(0);
+			ui.rightWidget->addItem(skill["name"]);
 		}
 	}
 }
@@ -760,7 +759,7 @@ void MyClass:: setup4Step2()// Main step 2
 	QLabel *courseNameShow = new QLabel(ui.classInsertGroupBox);
 	courseNameShow->setText(courseName);
 	ui.step1Layout->addWidget(courseNameShow);
-	if(courseMode == "CREATE")
+	if(courseMode == CREATE_COURSE_MODE)
 		ui.resultLabel->setText("<span style='color:red'><b>Step1:Saved</b></span>");
 }
 
@@ -835,7 +834,7 @@ void MyClass:: setupInfoBoxStep2Save(int numElementBoxSkill)
 		ui.step2Layout->addWidget(skillLabel);
 
 		QListWidget *listSkill = new QListWidget(ui.step2WidgetInfo);
-		if(courseMode == "EDIT")
+		if(courseMode == EDIT_COURSE_MODE)
 		{
 			QList< QMap<QString,QString> > skillRow = dbFile->getListByField("skill", "name", skill);
 			QString skillId    = skillRow.at(0)["id"];
@@ -895,35 +894,37 @@ bool MyClass:: isAddMaterial(QString skillNIndex)
 	QString index = stringlist.at(1);
 
 	QString text =  materialBox(skill,ok);
-	if (ok && !text.isEmpty())
-	{
-		// check Material
-		int in = index.toInt();
-		QListWidget *list =  skillWidgets.at(in);
-		bool isMaExist = isItemExist(text,list);
-		if(isMaExist == false)
-		{
-			QList<QString> matList;
-			matList.append(text);
-			QMap<QString,QString> insertRow =  dbFile->insertItemWithKeyId("material",matList);
-			int idMaterial  = insertRow["id"].toInt();
-			if(idMaterial !=-1 )
-			{
-				//insert into skill_material table	
-				QList< QMap<QString,QString> > skillList =  dbFile->getListByField("skill", "name", skill);
-				if(skillList.count()>0)
-				{
-					QString idSkill = skillList.at(0)["id"];
-					QList<QString> skillMaterialList;
-					skillMaterialList <<idSkill <<QString::number(idMaterial)<<QString::number(courseID);
-					QMap<QString,QString> insertRow =  dbFile->insertItemWithoutKeyId("skill_material",skillMaterialList);
-					idMaterial = insertRow["material_id"].toInt();
-					if(idMaterial!=-1)
-						list->addItem(text);
-				}
-			}
-		}
-	}
+	if (!(ok && !text.isEmpty()))
+		return false;
+
+	// check Material Exist
+	int in = index.toInt();
+	QListWidget *list =  skillWidgets.at(in);
+	bool isMaExist = isItemExist(text,list);
+	if(isMaExist == true) 
+		return false;
+
+	// Insert success or not
+	QList<QString> matList;
+	matList.append(text);
+	QMap<QString,QString> insertRow =  dbFile->insertItemWithKeyId("material",matList);
+	int idMaterial  = insertRow["id"].toInt();
+	if(idMaterial ==-1 )
+		return false;
+
+	//insert into skill_material table	
+	QList< QMap<QString,QString> > skillList =  dbFile->getListByField("skill", "name", skill);
+	if(skillList.count() <= 0)
+		return false;
+	
+	QString idSkill = skillList.at(0)["id"];
+	QList<QString> skillMaterialList;
+	skillMaterialList <<idSkill <<QString::number(idMaterial)<<QString::number(courseID);
+	QMap<QString,QString> insertSkillMat =  dbFile->insertItemWithoutKeyId("skill_material",skillMaterialList);
+	idMaterial     = insertSkillMat["material_id"].toInt();
+	if(idMaterial != -1)
+		list->addItem(text);
+	
 	return ok;
 }
 
@@ -938,7 +939,7 @@ void MyClass:: loadConfigAddCourseTab()
 	ui.addMoreButton->setVisible(false);
 	courseName = "";
 	courseID = 0;
-	courseMode = "CREATE";
+	courseMode = CREATE_COURSE_MODE;
 	ui.courseNameLineEdit->setFocus();
 }
 
@@ -956,81 +957,86 @@ void MyClass:: refreshToOriginAddCourse()
 
 	clearItemsLayout(ui.step1Layout);
 	clearItemsLayout(ui.step2Layout);
-	//step 3
 	clearItemsLayout(ui.verticalLayout);
 
 	//step 2 
 	int numLeft  = ui.leftWidget->count();
 	int numRight = ui.rightWidget->count();
-	for (int i =0;i<numLeft;i++)
+	for (int i = 0; i < numLeft; i++)
 		ui.leftWidget->takeItem(0);
-	for (int i =0;i<numRight;i++)
+	for (int i = 0; i < numRight; i++)
 		ui.rightWidget->takeItem(0);
 
 	courseName = "";
-	courseID = 0;
-	courseMode = "CREATE";
+	courseID   = 0;
+	courseMode = CREATE_COURSE_MODE;
 	skillsCourse.clear();
 	skillWidgets.clear();
 	ui.courseNameLineEdit->setFocus();
 }
 
 // ------------------------------- LIST CLASS TAB
+
+void MyClass:: getPerCentInClass(IN QMap<QString,QString> classRow, OUT int &percentMater, OUT int &percentDay )
+{
+	QList<QString> fields;
+	fields << "class_id" << "status";
+	QList<QString> fieldUseValues;
+	fieldUseValues << classRow["id"] << "1";
+
+	QList< QMap<QString,QString> > allMat = dbFile->getListByField("materialuse","class_id", classRow["id"]);
+	QList< QMap<QString,QString> > useMat = dbFile->getListByFields("materialuse",fields,fieldUseValues);
+
+	int allMater = allMat.count();
+	int useMater = useMat.count();
+
+	if(allMater!=0)
+		percentMater = (useMater*100/allMater);
+
+	QString totalDay    = classRow["total_day"];
+	QString learnDay    = classRow["num_learning_day"];
+	percentDay   = (learnDay.toInt()*100/totalDay.toInt());
+}
+
 void MyClass:: fillListClass(QList< QMap<QString,QString> > resClass)
 {
 	int numRow = resClass.count();
+
 	for(int rowCurrent=0;rowCurrent<numRow;rowCurrent++)
 	{
-		QList< QMap<QString,QString> > coRow = dbFile->getListByField("course","id",
-																	 resClass.at(rowCurrent)["course_id"]);
-		QString cName  = coRow.at(0)["name"];
-		QString regisDate   = resClass.at(rowCurrent)["registration_day"];
-		QString className   = resClass.at(rowCurrent)["name"];
-		QString totalDay    = resClass.at(rowCurrent)["total_day"];
-		QString learnDay    = resClass.at(rowCurrent)["num_learning_day"];
+		QMap<QString,QString> classRow       = resClass.at(rowCurrent);
+		QList< QMap<QString,QString> > coRow = dbFile->getListByField("course", "id", classRow["course_id"]);
+		QString cName       = coRow.at(0)["name"];
+		QString regisDate   = classRow["registration_day"];
+		QString className   = classRow["name"];
+		QString totalDay    = classRow["total_day"];
+		QString learnDay    = classRow["num_learning_day"];
 
-		listClassModel->setItem(rowCurrent,0, new QStandardItem(resClass.at(rowCurrent)["id"]));
+		listClassModel->setItem(rowCurrent,0, new QStandardItem(classRow["id"]));
 		listClassModel->setItem(rowCurrent,1, new QStandardItem(className));
 		listClassModel->setItem(rowCurrent,2, new QStandardItem(regisDate));
-
-		QSignalMapper *memberListMapper = new QSignalMapper(ui.listClassTable);
-		QPushButton *memberListButton = addActionButton(DETAIL_BUTTON, MAPPING_TYPE_STR, resClass.at(rowCurrent)["id"],
-														memberListMapper, ENABLE_TEXT_BUTTON);
-		QObject::connect(memberListMapper,SIGNAL(mapped(QString)),this,SLOT(detailMemberAction(QString)));
-		ui.listClassTable->setIndexWidget(listClassModel->index(rowCurrent,3),memberListButton);
-		//courseName
 		listClassModel->setItem(rowCurrent,4,new QStandardItem(cName));
-			
-		QList<QString> fields;
-		QList<QString> fieldUseValues;
-		QList<QString> fieldNotUseValues;
-		fields << "class_id" << "status";
-		fieldUseValues << resClass.at(rowCurrent)["id"] << "1";
 
-		QList< QMap<QString,QString> > allMat = dbFile->getListByField("materialuse","class_id", resClass.at(rowCurrent)["id"]);
-		QList< QMap<QString,QString> > useMat = dbFile->getListByFields("materialuse",fields,fieldUseValues);
-
-		int allMater = allMat.count();
-		int useMater = useMat.count();
-
-		QString idMU =  resClass.at(rowCurrent)["id"] ;
-
-		int percentMater = 0;
-		if(allMater!=0)
-			percentMater = (useMater*100/allMater);
-		int percentDay   = (learnDay.toInt()*100/totalDay.toInt());
-
+		int percentMater;
+		int percentDay;
+		getPerCentInClass(classRow, percentMater, percentDay );
 		listClassModel->setItem(rowCurrent,5,new QStandardItem(QString::number(percentDay)));
 		listClassModel->setItem(rowCurrent,6,new QStandardItem(QString::number(percentMater)));
 
+		QSignalMapper *memberListMapper = new QSignalMapper(ui.listClassTable);
+		QPushButton   *memberListButton = addActionButton(DETAIL_BUTTON, MAPPING_TYPE_STR, classRow["id"],
+														  memberListMapper, ENABLE_TEXT_BUTTON);
+		QObject::connect(memberListMapper,SIGNAL(mapped(QString)),this,SLOT(detailMemberAction(QString)));
+		ui.listClassTable->setIndexWidget(listClassModel->index(rowCurrent,3),memberListButton);
+
 		QSignalMapper *editClassMapper = new QSignalMapper(ui.listClassTable);
-		QPushButton *editClassButton   = addActionButton (EDIT_BUTTON, MAPPING_TYPE_STR, resClass.at(rowCurrent)["id"], 
+		QPushButton *editClassButton   = addActionButton (EDIT_BUTTON, MAPPING_TYPE_STR, classRow["id"], 
 														  editClassMapper, ENABLE_TEXT_BUTTON);
 		QObject::connect(editClassMapper,SIGNAL(mapped(QString)),this,SLOT(editClassAction(QString)));
 		ui.listClassTable->setIndexWidget(listClassModel->index(rowCurrent,7),editClassButton);
 
 		QSignalMapper *deleteClassMapper = new QSignalMapper(ui.listClassTable);
-		QPushButton *deleteClassButton   = addActionButton(DELETE_BUTTON, MAPPING_TYPE_STR, resClass.at(rowCurrent)["id"],
+		QPushButton *deleteClassButton   = addActionButton(DELETE_BUTTON, MAPPING_TYPE_STR, classRow["id"],
 														   deleteClassMapper, ENABLE_TEXT_BUTTON);
 		QObject::connect(deleteClassMapper,SIGNAL(mapped(QString)),this,SLOT(deleteClassAction(QString)));
 		ui.listClassTable->setIndexWidget(listClassModel->index(rowCurrent,8),deleteClassButton);
@@ -1041,29 +1047,12 @@ void MyClass:: loadListClassTab()
 {
 	ui.refreshClassButton->setText("");
 	ui.searchClassLineEdit->setText("");
-	listClassModel->clear();
-	QList<QString> listHeader;
-	listHeader << "ID" << "Class name" << "Registration day" << "Member" << "Course" << "% day"
-			   << "% material" << "EDIT" << "DELETE";
-	setHeaderTable(listClassModel,listHeader);
-	// resize columns
-	ui.listClassTable->setColumnWidth(0,30);
-	ui.listClassTable->setColumnWidth(1,180);
-	ui.listClassTable->setColumnWidth(2,100);
-	ui.listClassTable->setColumnWidth(3,75);
-	ui.listClassTable->setColumnWidth(4,75);
-	ui.listClassTable->setColumnWidth(5,75);
-	ui.listClassTable->setColumnWidth(6,75);
-	ui.listClassTable->setColumnWidth(7,75);
-	ui.listClassTable->setColumnWidth(8,75);
-	ui.listClassTable->setColumnHidden(0,true);
-	// fill value
 	QList< QMap<QString,QString> > classList = dbFile->getAll("class");
-	fillListClass(classList);
+	loadDataAndHeaderListClass(classList);
 }
 
 // ---------------------LIST COURSE TAB
-QString MyClass:: getSkillList(QString courseId)
+QString MyClass:: getSkillListStr(QString courseId)
 {
 	QList< QMap<QString,QString> > coSkiList = dbFile->getListByField("course_skill","course_id",courseId);
 	int numList = coSkiList.count();
@@ -1098,10 +1087,11 @@ void MyClass:: fillListCourse(QList< QMap<QString,QString> > materialRows,QTable
 		QString courseId = materialRows.at(i)["id"];
 		courseIdList.append(courseId);
 
-		QString skillString = getSkillList(courseId);	
+		QString skillString = getSkillListStr(courseId);	
 	
 		courseModel->setItem(indexTemp,0,new QStandardItem(course));
 		courseModel->setItem(indexTemp,1,new QStandardItem(skillString));
+
 		indexTemp++;
 	}
 
@@ -1140,11 +1130,11 @@ void MyClass:: loadListCourseTab()
 	headerList << "Course Name" << "Skill" << "Material" << "Edit" << "Delete";
 	setHeaderTable(listCourseModel, headerList);
 
-	ui.listCourseTable->setColumnWidth(0,170);
-	ui.listCourseTable->setColumnWidth(1,220);
-	ui.listCourseTable->setColumnWidth(2,80);
-	ui.listCourseTable->setColumnWidth(3,80);
-	ui.listCourseTable->setColumnWidth(4,80);
+	ui.listCourseTable->setColumnWidth(0,LIST_COURSE_COL_1);
+	ui.listCourseTable->setColumnWidth(1,LIST_COURSE_COL_2);
+	ui.listCourseTable->setColumnWidth(2,LIST_COURSE_COL_3);
+	ui.listCourseTable->setColumnWidth(3,LIST_COURSE_COL_4);
+	ui.listCourseTable->setColumnWidth(4,LIST_COURSE_COL_5);
 
 	QList< QMap<QString,QString> > res_set = dbFile->getAll("course");
 	fillListCourse(res_set,ui.listCourseTable,listCourseModel,0);
@@ -1179,7 +1169,7 @@ void MyClass:: refreshAddClassAction()
 	loadDataAddClassTab(0);
 	QWidget * tab = ui.mainTab->widget(1);
 	ui.mainTab->setCurrentWidget(tab);
-	classID =0;
+	classID = ADD_MODE_CLASS;
 
 	ui.mainTab->setTabEnabled(0,false);
 	ui.mainTab->setTabEnabled(1,true);
@@ -1194,7 +1184,7 @@ void MyClass:: cancelClassAction()
 	ui.searchClassLineEdit->setText("");
 	QWidget * tab = ui.mainTab->widget(0);
 	ui.mainTab->setCurrentWidget(tab);
-	classID =0;
+	classID = ADD_MODE_CLASS;
 
 	ui.mainTab->setTabEnabled(0,true);
 	ui.mainTab->setTabEnabled(1,false);
@@ -1227,145 +1217,161 @@ void MyClass::delMaterialTable(QString materialNSkillIndex)
 	}
 }
 
+QList<QString> MyClass::getMemberListSaveClass()
+{
+	int rowMember = addMemberModel->rowCount();
+	QList<QString> memberList;
+	for(int i = 0;i<rowMember;i++) // check number in birthyear and check whether have member
+	{
+		QString birthYear = addMemberModel->data(addMemberModel->index(i,1),Qt::DisplayRole).toString().trimmed();
+		QString memberName = addMemberModel->data(addMemberModel->index(i,0),Qt::DisplayRole).toString().trimmed();
+		if(memberName=="")
+			break;
+
+		memberList.append(memberName);
+		if( birthYear.length()>0 && isNumber(birthYear) == false)
+		{
+			QMessageBox::warning(this,tr("Member infomation"),tr("Please fill a NUMBER for 'birth year' !!"));
+			memberList.clear();
+			return memberList;
+		}
+	}
+	return memberList;
+}
+
+bool MyClass:: validateDataSaveClass()
+{
+	int rowMember = addMemberModel->rowCount();
+	if (ui.classNameLineEdit->text()=="")
+	{
+		QMessageBox::warning(this,tr("Class name"),tr("Please fill the blank!!"));
+		ui.classNameLineEdit->setFocus();
+		return false;
+	}
+	else if(ui.totalDateLineEdit->text()=="" || isNumber(ui.totalDateLineEdit->text())==false) // check if a number
+	{
+		QMessageBox::warning(this,tr("Total days"),tr("Please fill the blank, and value is a NUMBER!!"));
+		ui.totalDateLineEdit->setFocus();
+		return false;
+	}
+	else if(ui.courseClassLabel->text()=="")
+	{
+		QMessageBox::warning(this,tr("Choose Course"),tr("Please select the suitable course!!"));
+		return false;
+	}
+
+	QList<QString> memberList = getMemberListSaveClass();
+	if (memberList.count() == 0 ) // check whether contain member
+	{
+		QMessageBox::warning(this,tr("Add Member"),tr("Please fill the member info!!"));
+		return false;
+	}	
+
+	return true;
+}
+void MyClass::saveMembersInClass(QList<QString> memberList, QString classId)
+{
+	int numMember             = memberList.count();
+	for(int i = 0;i<numMember;i++)
+	{
+		QString memberName = memberList.at(i);
+		if(memberName == "")
+			break;
+
+		QString birthYear = addMemberModel->data(addMemberModel->index(i,1),Qt::DisplayRole).toString().trimmed();
+		QString note      = addMemberModel->data(addMemberModel->index(i,2),Qt::DisplayRole).toString().trimmed();
+		
+		QList<QString> memberListInfo;
+		memberListInfo << memberName << birthYear << note;
+		QMap<QString,QString> memberInsert = dbFile->insertItemWithKeyId("member",memberListInfo);
+		if(memberInsert.count() <= 0)
+			break;
+
+		QList<QString> classMemberInsert;
+		classMemberInsert << classId << memberInsert["id"];
+		dbFile->insertItemWithoutKeyId("class_member",classMemberInsert);
+	}
+}
 
 /**
   * Check data before saving
   */
 void MyClass:: saveClassAction()
 {
-	// checl data
-	int rowMember = addMemberModel->rowCount();
-	if (ui.classNameLineEdit->text()=="")
-	{
-		QMessageBox::warning(this,tr("Class name"),tr("Please fill the blank!!"));
-		ui.classNameLineEdit->setFocus();
+	// validate data
+	bool isDataPass = validateDataSaveClass();
+	if (isDataPass == false)
 		return;
-	}
-	else if(ui.totalDateLineEdit->text()=="" || isNumber(ui.totalDateLineEdit->text())==false) // check if a number
+
+	// SAVE
+	if (classID == ADD_MODE_CLASS)
 	{
-		QMessageBox::warning(this,tr("Total days"),tr("Please fill the blank, and value is a NUMBER!!"));
-		ui.totalDateLineEdit->setFocus();
-		return;
-	}
-	else if(ui.courseClassLabel->text()=="")
-	{
-		QMessageBox::warning(this,tr("Choose Course"),tr("Please select the suitable course!!"));
-		return;
-	}
-	else  
-	{
-		QList<QString> memberList;
-		bool haveMember = false;
-		int numMember = 0;
-		for(int i = 0;i<rowMember;i++) // check number in birthyear and check whether have member
+		QList<QString> classListInfo;
+		classListInfo << ui.classNameLineEdit->text() << "0" << ui.regisdateEdit->date().toString("yyyy-MM-dd")
+			          << ui.totalDateLineEdit->text() << "0" <<ui.otherLineEdit->text();
+		QMap<QString,QString> classInsert = dbFile->insertItemWithKeyId("class",classListInfo);
+		if(classInsert.count() <= 0)
+			configAfterSaveClass();
+		
+		//save members
+		QList<QString> memberList = getMemberListSaveClass();
+		saveMembersInClass(memberList, classInsert["id"]);
+
+		//edit course_id to class table 
+		QString courseName  = ui.courseClassLabel->text();
+		QList< QMap<QString,QString> > courseList = dbFile->getListByField("course","name",courseName);
+		dbFile->editOneFieldById("class", "id", classInsert["id"], "course_id", courseList.at(0)["id"]);
+
+		//save material
+		int skillNum = skillModelList.count();
+		QList<QString> mateUseList;
+		for(int i =0;i<skillNum;i++)
 		{
-			QString birthYear = addMemberModel->data(addMemberModel->index(i,1),Qt::DisplayRole).toString().trimmed();
-			QString memberName = addMemberModel->data(addMemberModel->index(i,0),Qt::DisplayRole).toString().trimmed();
-			if(memberName!="")
+			QStandardItemModel *skillModel = skillModelList.at(i);
+			int materialRow                = skillModel->rowCount();
+			for(int j=0;j<materialRow;j++)
 			{
-				memberList.append(memberName);
-				haveMember = true;
-				numMember++;
-				if( birthYear.length()>0 && isNumber(birthYear) == false)
-				{
-					QMessageBox::warning(this,tr("Member infomation"),tr("Please fill a NUMBER for 'birth year' !!"));
-					return;
-				}
+				QString materialId = skillModel->data(skillModel->index(j,0),Qt::DisplayRole).toString().trimmed();
+				mateUseList.clear();
+				mateUseList << materialId << classInsert["id"] << skillIdList.at(i) << "0";
+				dbFile->insertItemWithoutKeyId("materialuse",mateUseList);
 			}
 		}
-		if (haveMember == false) // check whether contain member
-		{
-			QMessageBox::warning(this,tr("Add Member"),tr("Please fill the member info!!"));
-			return;
-		}	
-
-		// SAVE
-		if (classID ==0)
-		{
-			QList<QString> classListInfo;
-			classListInfo << ui.classNameLineEdit->text() << "0" << ui.regisdateEdit->date().toString("yyyy-MM-dd")
-				          << ui.totalDateLineEdit->text() << "0" <<ui.otherLineEdit->text();
-			QMap<QString,QString> classInsert = dbFile->insertItemWithKeyId("class",classListInfo);
-			int classId  = 0;
-			if(classInsert.count()>0)
-			{
-				classId = classInsert["id"].toInt();
-				//save members
-				for(int i = 0;i<numMember;i++)
-				{
-					QString memberName = memberList.at(i);
-					if(memberName != "")
-					{
-						QString birthYear = addMemberModel->data(addMemberModel->index(i,1),Qt::DisplayRole).toString().trimmed();
-						QString note      = addMemberModel->data(addMemberModel->index(i,2),Qt::DisplayRole).toString().trimmed();
-						
-						QList<QString> memberListInfo;
-						memberListInfo << memberName << birthYear << note;
-						QMap<QString,QString> memberInsert = dbFile->insertItemWithKeyId("member",memberListInfo);
-						if(memberInsert.count() >0)
-						{
-							QList<QString> classMemberInsert;
-							classMemberInsert << QString::number(classId) << memberInsert["id"];
-							dbFile->insertItemWithoutKeyId("class_member",classMemberInsert);
-						}
-					}
-				}
-				//edit course_id to class table
-				QString courseName  = ui.courseClassLabel->text();
-				QList< QMap<QString,QString> > courseList = dbFile->getListByField("course","name",courseName);
-				dbFile->editOneFieldById("class","id",QString::number(classId),"course_id",courseList.at(0)["id"]);
-
-				//save material
-				int skillNum = skillModelList.count();
-				QList<QString> mateUseList;
-				for(int i =0;i<skillNum;i++)
-				{
-					QStandardItemModel *skillModel = skillModelList.at(i);
-					int materialRow                = skillModel->rowCount();
-					for(int j=0;j<materialRow;j++)
-					{
-						QString materialId = skillModel->data(skillModel->index(j,0),Qt::DisplayRole).toString().trimmed();
-						mateUseList.clear();
-						mateUseList << materialId << QString::number(classId) << skillIdList.at(i) << "0";
-						dbFile->insertItemWithoutKeyId("materialuse",mateUseList);
-					}
-				}
-			}
-
-		}
-		else // edit
-		{
-			//member
-			if(enableForEditing.at(INDEX_MEMBER_INFO) == EDITCLASS_MEMBER_ENABLE )
-			{
-				editMember();
-				enableForEditing[INDEX_MEMBER_INFO] = EDITCLASS_MEMBER_DISABLE;
-			}
-			//course
-			if(enableForEditing.at(INDEX_COURSE_INFO) == EDITCLASS_COURSE_ENABLE)
-			{
-				editCourse();
-				editClass();
-				enableForEditing[INDEX_COURSE_INFO] = EDITCLASS_COURSE_DISABLE;
-			}
-			//class
-			if(enableForEditing.at(INDEX_CLASS_INFO) == EDITCLASS_INFO_ENABLE)
-			{
-				editClass();
-				enableForEditing[INDEX_CLASS_INFO] = EDITCLASS_INFO_DISABLE;
-			}
-		}
-		classID =0;
-		loadListClassTab();
-		loadDataAddClassTab(0);
-		QWidget * tab = ui.mainTab->widget(0);
-
-		ui.mainTab->setCurrentWidget(tab);
-		ui.mainTab->setTabEnabled(0,true);
-		ui.mainTab->setTabEnabled(1,false);
-		ui.mainTab->setTabEnabled(2,true);
-		ui.mainTab->setTabEnabled(3,false);
 	}
+	else // edit
+	{
+		if(enableForEditing.at(INDEX_MEMBER_INFO) == EDITCLASS_MEMBER_ENABLE )
+		{
+			editMember();
+			enableForEditing[INDEX_MEMBER_INFO] = EDITCLASS_MEMBER_DISABLE;
+		}
+		if(enableForEditing.at(INDEX_COURSE_INFO) == EDITCLASS_COURSE_ENABLE)
+		{
+			editCourse();
+			editClass();
+			enableForEditing[INDEX_COURSE_INFO] = EDITCLASS_COURSE_DISABLE;
+		}
+		if(enableForEditing.at(INDEX_CLASS_INFO) == EDITCLASS_INFO_ENABLE)
+		{
+			editClass();
+			enableForEditing[INDEX_CLASS_INFO] = EDITCLASS_INFO_DISABLE;
+		}
+	}
+	configAfterSaveClass();
+}
+
+void MyClass:: configAfterSaveClass()
+{
+	classID = ADD_MODE_CLASS;
+	loadListClassTab();
+	loadDataAddClassTab(0);
+	QWidget * tab = ui.mainTab->widget(0);
+
+	ui.mainTab->setCurrentWidget(tab);
+	ui.mainTab->setTabEnabled(0,true);
+	ui.mainTab->setTabEnabled(1,false);
+	ui.mainTab->setTabEnabled(2,true);
+	ui.mainTab->setTabEnabled(3,false);
 }
 
 /**
@@ -1377,8 +1383,7 @@ void MyClass:: courseComboAction(QString courseStr)
 	if(courseStr == "Choose course")
 	{
 		ui.courseInfoLabel->setText(tr(""));
-		ui.courseClassLabel->setText(tr(""));
-	
+		ui.courseClassLabel->setText(tr(""));	
 		return;
 	}
 	skillModelList.clear();
@@ -1390,13 +1395,13 @@ void MyClass:: courseComboAction(QString courseStr)
 	QString courseIdStr = courseList.at(0)["id"];
 	fillMaterial4AddMember(courseIdStr);
 	ui.courseInfoLabel->setText("<b>Course "+courseStr+" info</b>");
-	if(classID!=0)
-	{
-		QList< QMap<QString,QString> > clList = dbFile->getListByField("class","id",QString::number(classID));
-		QList< QMap<QString,QString> > coList = dbFile->getListByField("course","id",clList.at(0)["course_id"]);
+	if(classID == ADD_MODE_CLASS)
+		return;
 
-		addUseCheckBox(coList.at(0)["name"],courseStr);
-	}
+	QList< QMap<QString,QString> > clList = dbFile->getListByField("class","id",QString::number(classID));
+	QList< QMap<QString,QString> > coList = dbFile->getListByField("course","id",clList.at(0)["course_id"]);
+
+	addUseCheckBox(coList.at(0)["name"],courseStr);
 }
 
 //SLOT
@@ -1425,7 +1430,7 @@ void MyClass:: step1SaveAction() // disable step 1, enable step 2, update info t
 	}
 	courseName = ui.courseNameLineEdit->text();
 
-	if(courseMode == "CREATE")
+	if(courseMode == CREATE_COURSE_MODE)
 	{
 		ui.step1Widget->setEnabled(false);
 		QList<QString> courseList;
@@ -1462,7 +1467,7 @@ void MyClass:: step2SaveAction() // save value to skillsCourse, fill step 3 info
 		return;
 	}
 
-	if(courseMode == "CREATE")
+	if(courseMode == CREATE_COURSE_MODE)
 		saveCourseSKillTable(numSkills);
 
 	setup4Step3();
@@ -1481,13 +1486,13 @@ void MyClass:: addSkillAction()
 		for(int i=0;i<numSkill;i++)
 			listItems.append(skillList.at(i)["name"]);
 
-		if(checkItemExist(text, listItems) == false)
-		{
-			QList<QString> skList;
-			skList.append(text);
-			dbFile->insertItemWithKeyId("skill",skList);
-			ui.leftWidget->addItem(text);
-		}
+		if(checkItemExist(text, listItems) == true) // item exist -> not add
+			return;
+
+		QList<QString> skList;
+		skList.append(text);
+		dbFile->insertItemWithKeyId("skill",skList);
+		ui.leftWidget->addItem(text);
 	}
 }
 
@@ -1549,35 +1554,35 @@ void MyClass:: listMaterialAction(QString skillNIndex)
 	listMaterialDialog *dialog = new listMaterialDialog(this,dbFile,skill,courseID);
 	dialog->exec();
 	bool isChange = dialog->isChanged;
-	if(isChange == true)
-	{
-		QList< QMap<QString,QString> > skillList =  dbFile->getListByField("skill", "name", skill);
-		QString skillId    = skillList.at(0)["id"];
-		//Clear old list, and add new list --> Box Info
-		QListWidget *listWidget = skillWidgets.at(indexInt);
-		listWidget->clear();
-		QString courseIdStr  = QString::number(courseID);
-//getListByFields
-		QList<QString> fieldList;
-		QList<QString> valueList;
-		fieldList << "skill_id" << "course_id" ;
-		valueList << skillId << courseIdStr;
-		QList< QMap<QString,QString > > skiMaList = dbFile->getListByFields("skill_material",fieldList,valueList);
+	if(isChange == false) 
+		return;
 
-		int numRow = skiMaList.count();
-		if(numRow>0)
-		{
-			for(int i=0; i <numRow; i++)
-			{
-				QString maId = skiMaList.at(i)["material_id"];
-				QList< QMap<QString,QString> > maList = dbFile->getListByField("material","id",maId);
-				if(maList.count()>0)
-				{
-					QString ma   = maList.at(0)["name"];
-					listWidget->addItem(ma);
-				}
-			}
-		}	
+	QList< QMap<QString,QString> > skillList =  dbFile->getListByField("skill", "name", skill);
+	QString skillId    = skillList.at(0)["id"];
+	//Clear old list, and add new list --> Box Info
+	QListWidget *listWidget = skillWidgets.at(indexInt);
+	listWidget->clear();
+	QString courseIdStr  = QString::number(courseID);
+	//getListByFields
+	QList<QString> fieldList;
+	QList<QString> valueList;
+	fieldList << "skill_id" << "course_id" ;
+	valueList << skillId << courseIdStr;
+	QList< QMap<QString,QString > > skiMaList = dbFile->getListByFields("skill_material",fieldList,valueList);
+
+	int numRow = skiMaList.count();
+	if(numRow <= 0)
+		return;
+
+	for(int i=0; i <numRow; i++)
+	{
+		QString maId = skiMaList.at(i)["material_id"];
+		QList< QMap<QString,QString> > maList = dbFile->getListByField("material","id",maId);
+		if(maList.count() <= 0)
+			break;
+
+		QString ma   = maList.at(0)["name"];
+		listWidget->addItem(ma);
 	}
 }
 
@@ -1596,7 +1601,7 @@ void MyClass:: addMaterialAction(QString skillNIndex)
 
 void MyClass:: saveCourseAction()
 {
-	if(courseMode == "EDIT")
+	if(courseMode == EDIT_COURSE_MODE)
 		step1SaveAction();
 	QWidget * tab = ui.mainTab->widget(2);
 	ui.mainTab->setCurrentWidget(tab);
@@ -1650,8 +1655,8 @@ void MyClass:: editCourseAction(QString courseId)
 	// --> Must asign value to CourseId and CourseName --> for value in clicked() signal()
 	QList< QMap<QString,QString> > courseList = dbFile->getListByField("course","id",courseId);
 	courseName  = courseList.at(0)["name"];
-	courseID = courseId.toInt();
-	courseMode = "EDIT";
+	courseID    = courseId.toInt();
+	courseMode  = EDIT_COURSE_MODE;
 	//setup info
 	ui.courseNameLineEdit->setText(courseName); // step1
 	setup4Step2();
@@ -1680,6 +1685,26 @@ void MyClass:: deleteCourseAction(QString courseId)
 	if(ret == QMessageBox::Ok)
 		deleteCourse(courseId);
 }
+void MyClass::loadDataAndHeaderListClass(QList< QMap<QString,QString> > resClass)
+{
+	listClassModel->clear();
+	QList<QString> listHeader;
+	listHeader << "ID" << "Class name" << "Registration day" << "Member" << "Course" 
+			   << "% day" << "% material" << "EDIT" << "DELETE";
+	setHeaderTable(listClassModel,listHeader);
+			// resize columns
+	ui.listClassTable->setColumnWidth(0,LIST_CLASS_COL_1);
+	ui.listClassTable->setColumnWidth(1,LIST_CLASS_COL_2);
+	ui.listClassTable->setColumnWidth(2,LIST_CLASS_COL_3);
+	ui.listClassTable->setColumnWidth(3,LIST_CLASS_COL_4);
+	ui.listClassTable->setColumnWidth(4,LIST_CLASS_COL_5);
+	ui.listClassTable->setColumnWidth(5,LIST_CLASS_COL_6);
+	ui.listClassTable->setColumnWidth(6,LIST_CLASS_COL_7);
+	ui.listClassTable->setColumnWidth(7,LIST_CLASS_COL_8);
+	ui.listClassTable->setColumnWidth(8,LIST_CLASS_COL_9);
+	// fill value	
+	fillListClass(resClass);
+}
 
 // SLOT 
 // --------------------- LIST CLASS TAB
@@ -1688,25 +1713,8 @@ void MyClass:: searchClassAction()
 	QString textSearchTemp = ui.searchClassLineEdit->text();
 	QString textSearch     = textSearchTemp.trimmed();
 	
-	//delete all row and fill data
-	listClassModel->clear();
-	QList<QString> listHeader;
-	listHeader << "ID" << "Class name" << "Registration day" << "Member" << "Course" 
-			   << "% day" << "% material" << "EDIT" << "DELETE";
-	setHeaderTable(listClassModel,listHeader);
-			// resize columns
-	ui.listClassTable->setColumnWidth(0,30);
-	ui.listClassTable->setColumnWidth(1,180);
-	ui.listClassTable->setColumnWidth(2,100);
-	ui.listClassTable->setColumnWidth(3,75);
-	ui.listClassTable->setColumnWidth(4,75);
-	ui.listClassTable->setColumnWidth(5,75);
-	ui.listClassTable->setColumnWidth(6,75);
-	ui.listClassTable->setColumnWidth(7,75);
-	ui.listClassTable->setColumnWidth(8,75);
-	// fill value
 	QList< QMap<QString,QString> > resClass = dbFile->getListByPartValue("class", "name", textSearch);
-	fillListClass(resClass);
+	loadDataAndHeaderListClass(resClass);
 }
 
 void MyClass:: refreshClassListAction()

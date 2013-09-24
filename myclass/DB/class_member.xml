@@ -16,5 +16,33 @@
 		<class_id>1</class_id>
 		<member_id>6</member_id>
 	</class_member>
+	<class_member>
+		<class_id>3</class_id>
+		<member_id>7</member_id>
+	</class_member>
+	<class_member>
+		<class_id>4</class_id>
+		<member_id>8</member_id>
+	</class_member>
+	<class_member>
+		<class_id>5</class_id>
+		<member_id>9</member_id>
+	</class_member>
+	<class_member>
+		<class_id>5</class_id>
+		<member_id>10</member_id>
+	</class_member>
+	<class_member>
+		<class_id>6</class_id>
+		<member_id>11</member_id>
+	</class_member>
+	<class_member>
+		<class_id>6</class_id>
+		<member_id>12</member_id>
+	</class_member>
+	<class_member>
+		<class_id>7</class_id>
+		<member_id>13</member_id>
+	</class_member>
 </class_members>
 

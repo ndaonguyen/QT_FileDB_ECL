@@ -21,7 +21,7 @@ class databaseFile
 public:
 	databaseFile(void);
 	~databaseFile(void);
-	QFile* getFile(QString table,QString mode);
+	QFile* getFile(QString table);
 	bool isNumber(QString strCheck);
 	QList<QString> getDbStructure(QString table);
 	

@@ -80,7 +80,11 @@ public:
 	void setSkillLabelInMaBox(QString skillId);
 	void fillMaterialForEachSkill(QList< QMap<QString,QString> > resMaterialUse, int skillIndex, 
 								  QTableView *skillTable, QStandardItemModel *skillModel);
-	void fillMaterial4AddMember(QString courseIdStr);
+	void fillMaterial4AddMember(QString courseIdStr); // **
+	QList<QString> getMemberListSaveClass();
+	bool validateDataSaveClass();
+	void configAfterSaveClass();
+	void saveMembersInClass(QList<QString> memberList, QString classId);
 // END   : ADD CLASS TAB
 
 
@@ -105,13 +109,16 @@ public:
 
 
 // START: LIST CLASS TAB
+	void getPerCentInClass(IN QMap<QString,QString> classRow, OUT int &percentMater, OUT int &percentDay );
 	void fillListClass(QList< QMap<QString,QString> > resClass);
+	void loadDataAndHeaderListClass(QList< QMap<QString,QString> > resClass);
 	void loadListClassTab();  // main function
+	
 // END: LIST CLASS TAB
 
 
 //  START :LIST COURSE TAB
-	QString getSkillList(QString courseId);
+	QString getSkillListStr(QString courseId);
 	void fillListCourse(QList< QMap<QString,QString> > materialRows,QTableView *listCourseTable,
 						QStandardItemModel *courseModel, int indexRow);
 	void loadListCourseTab();
@@ -125,8 +132,8 @@ public:
 		void enableCourseAction();
 		void refreshAddClassAction();
 		void cancelClassAction();
-		void delMaterialTable(QString materialNSkillIndex);
-		void saveClassAction();
+		void delMaterialTable(QString materialNSkillIndex);		
+		void saveClassAction();		
 		void courseComboAction(QString courseStr);
 // END   : ADD CLASS TAB
 

@@ -33,3 +33,34 @@
 
 #define ENABLE_TEXT_BUTTON  true
 #define DISABLE_TEXT_BUTTON false 
+
+#define ADD_MEM_COL_1 110
+#define ADD_MEM_COL_2 60
+#define ADD_MEM_COL_3 40
+#define ADD_MEM_COL_4 50
+#define ADD_MEM_COL_5 30
+
+#define NUM_MEM_EMPTY 10
+
+#define CREATE_COURSE_MODE "CREATE"
+#define EDIT_COURSE_MODE   "EDIT"
+
+#define IN
+#define OUT
+
+
+#define LIST_CLASS_COL_1 30
+#define LIST_CLASS_COL_2 180
+#define LIST_CLASS_COL_3 100
+#define LIST_CLASS_COL_4 75
+#define LIST_CLASS_COL_5 75
+#define LIST_CLASS_COL_6 75
+#define LIST_CLASS_COL_7 75
+#define LIST_CLASS_COL_8 75
+#define LIST_CLASS_COL_9 75
+
+#define LIST_COURSE_COL_1 170
+#define LIST_COURSE_COL_2 220
+#define LIST_COURSE_COL_3 80
+#define LIST_COURSE_COL_4 80
+#define LIST_COURSE_COL_5 80

@@ -2,7 +2,8 @@
 
 databaseFile::databaseFile(void)
 {
-	dbClass<< "id" << "name" << "course_id" << "registration_day" << "total_day" << "num_learning_day" << "note";
+	dbClass << "id" << "name" << "course_id" << "registration_day" 
+		    << "total_day" << "num_learning_day" << "note";
 	dbClassMember << "class_id" << "member_id";
 	dbCourse << "id" << "name";
 	dbCourseSkill << "course_id" << "skill_id";
@@ -121,31 +122,32 @@ QMap<QString,QString> databaseFile::searchMax(QString table, QString field)
 	int maxValue = 0;
 	int indexMax = 0;
 	// exist --> find the max
-	if(isExist == true)
+	if(isExist == false)
+		return itemReturn;
+		
+	int numRow = listInfo.count();
+	if(numRow <= 0)
+		return itemReturn
+
+	// check if number
+	QMap<QString,QString> tempInfo = listInfo.at(0);
+	QString tempValue = tempInfo[field];
+	if(isNumber(tempValue) == false)
+		return itemReturn;
+
+	for(int j=0;j<numRow;j++)
 	{
-		int numRow = listInfo.count();
-		if(numRow > 0)
+		QMap<QString,QString> itemInfo = listInfo.at(j);
+		QString itemValue = itemInfo[field];
+		int itemValueInt  = itemValue.toInt();
+		if(itemValueInt > maxValue)
 		{
-			// check if number
-			QMap<QString,QString> tempInfo = listInfo.at(0);
-			QString tempValue = tempInfo[field];
-			if(isNumber(tempValue) == true)
-			{
-				for(int j=0;j<numRow;j++)
-				{
-					QMap<QString,QString> itemInfo = listInfo.at(j);
-					QString itemValue = itemInfo[field];
-					int itemValueInt  = itemValue.toInt();
-					if(itemValueInt > maxValue)
-					{
-						maxValue = itemValueInt;
-						indexMax = j;
-					}
-				}
-			}
-			itemReturn =  listInfo.at(indexMax);
+			maxValue = itemValueInt;
+			indexMax = j;
 		}
 	}
+	itemReturn =  listInfo.at(indexMax);
+
 	return itemReturn;
 }
 
@@ -246,33 +248,33 @@ void databaseFile::deleteByField(QString table, QString field, QString fieldValu
 void databaseFile::removeItemsDbBrowse(QString table,int index)
 {
 	QList< QMap<QString,QString> > listInfo = getAll(table);
-	if(index < listInfo.count())
-	{
-		if(table =="class")
-			classList.removeAt(index);
-		else if(table =="class_member")
-			classMemberList.removeAt(index);
-		else if(table =="course")
-			courseList.removeAt(index);
-		else if(table =="course_skill")
-			courseSkillList.removeAt(index);
-		else if(table =="material")
-			materialList.removeAt(index);
-		else if(table =="materialuse")
-			materialUseList.removeAt(index);
-		else if(table =="member")
-			memberList.removeAt(index);
-		else if(table =="skill")
-			skillList.removeAt(index);
-		else if(table =="skill_material")
-			skillMaterialList.removeAt(index);
-	}
+	if(index >= listInfo.count())
+		return;
+
+	if(table =="class")
+		classList.removeAt(index);
+	else if(table =="class_member")
+		classMemberList.removeAt(index);
+	else if(table =="course")
+		courseList.removeAt(index);
+	else if(table =="course_skill")
+		courseSkillList.removeAt(index);
+	else if(table =="material")
+		materialList.removeAt(index);
+	else if(table =="materialuse")
+		materialUseList.removeAt(index);
+	else if(table =="member")
+		memberList.removeAt(index);
+	else if(table =="skill")
+		skillList.removeAt(index);
+	else if(table =="skill_material")
+		skillMaterialList.removeAt(index);
 }
 
 bool databaseFile:: isNumber(QString strCheck)
 {
 	int strLen = strCheck.length();
-	if(strLen==0)
+	if(strLen == 0)
 		return false;
 	for(int i=0;i<strLen;i++)
 	{
@@ -283,58 +285,36 @@ bool databaseFile:: isNumber(QString strCheck)
 	return true;
 }
 
-QFile* databaseFile::getFile(QString table,QString mode)
+QFile* databaseFile::getFile(QString table)
 {
 	QFile* file ;
-	if(mode == "read")
-	{
-		if(table =="class")
-			file = new QFile("DB/class.xml");
-		else if(table =="class_member")
-			file = new QFile("DB/class_member.xml");
-		else if(table =="course")
-			file = new QFile("DB/course.xml");
-		else if(table =="course_skill")
-			file = new QFile("DB/course_skill.xml");
-		else if(table =="material")
-			file = new QFile("DB/material.xml");
-		else if(table =="materialuse")
-			file = new QFile("DB/materialuse.xml");
-		else if(table =="member")
-			file = new QFile("DB/member.xml");
-		else if(table =="skill")
-			file = new QFile("DB/skill.xml");
-		else if(table =="skill_material")
-			file = new QFile("DB/skill_material.xml");
-	}
-	else if(mode == "write")
-	{
-		if(table=="class")
-			file = new QFile("DB/class.xml");
-		else if(table=="class_member")
-			file = new QFile("DB/class_member.xml");
-		else if(table =="course")
-			file = new QFile("DB/course.xml");
-		else if(table =="course_skill")
-			file = new QFile("DB/course_skill.xml");
-		else if(table =="material")
-			file = new QFile("DB/material.xml");
-		else if(table =="materialuse")
-			file = new QFile("DB/materialuse.xml");
-		else if(table =="member")
-			file = new QFile("DB/member.xml");
-		else if(table =="skill")
-			file = new QFile("DB/skill.xml");
-		else if(table =="skill_material")
-			file = new QFile("DB/skill_material.xml");
-	}
+	
+	if(table =="class")
+		file = new QFile("DB/class.xml");
+	else if(table =="class_member")
+		file = new QFile("DB/class_member.xml");
+	else if(table =="course")
+		file = new QFile("DB/course.xml");
+	else if(table =="course_skill")
+		file = new QFile("DB/course_skill.xml");
+	else if(table =="material")
+		file = new QFile("DB/material.xml");
+	else if(table =="materialuse")
+		file = new QFile("DB/materialuse.xml");
+	else if(table =="member")
+		file = new QFile("DB/member.xml");
+	else if(table =="skill")
+		file = new QFile("DB/skill.xml");
+	else if(table =="skill_material")
+		file = new QFile("DB/skill_material.xml");		
+	
 	return file;
 }
 
 QList< QMap<QString,QString> > databaseFile::readFile(QString table)
 {
 	QList< QMap<QString,QString> > infoRead;
-	QFile* file = this->getFile(table,"read");
+	QFile* file = this->getFile(table);
 	if (!file->open(QIODevice::ReadOnly | QIODevice::Text)) 
 		return infoRead;
 
@@ -347,11 +327,16 @@ QList< QMap<QString,QString> > databaseFile::readFile(QString table)
 
 		if(token == QXmlStreamReader::StartElement) 
 		{
-			if(table =="class" || table =="class_member" || table =="course" || table =="course_skill" || table =="material"|| table =="materialuse" || table =="member"|| table =="skill"|| table =="skill_material")
+			if( table =="class" || table =="class_member" || table =="course" || table =="course_skill" 
+		        || table =="material"|| table =="materialuse" || table =="member"|| table =="skill"|| table =="skill_material")
 			{
-				if(xml.name() == "classes" || xml.name() == "class_members" || xml.name() == "courses" || xml.name() == "course_skills" || xml.name() == "materials" || xml.name() == "materialuses"|| xml.name() == "members"|| xml.name() == "skills"|| xml.name() == "skill_materials")
+				if( xml.name() == "classes" || xml.name() == "class_members" || xml.name() == "courses" 
+					|| xml.name() == "course_skills" || xml.name() == "materials" || xml.name() == "materialuses"
+					|| xml.name() == "members"|| xml.name() == "skills"|| xml.name() == "skill_materials")
 					continue;
-				else if(xml.name() == "class" || xml.name() == "class_member" || xml.name() == "course" || xml.name() == "course_skill" || xml.name() == "material" || xml.name() == "materialuse"|| xml.name() == "member" || xml.name() == "skill" || xml.name() == "skill_material") 
+				else if(xml.name() == "class" || xml.name() == "class_member" || xml.name() == "course" 
+					    || xml.name() == "course_skill" || xml.name() == "material" || xml.name() == "materialuse"
+						|| xml.name() == "member" || xml.name() == "skill" || xml.name() == "skill_material") 
 					infoRead.append(this->parseEach(table,xml));
 			}
         }
@@ -392,7 +377,7 @@ QMap<QString,QString> databaseFile:: parseEach(QString table,QXmlStreamReader& x
 
 void databaseFile::writeFile(QString table,QList< QMap<QString,QString> > classList)
 {
-	QFile* file = this->getFile(table,"write");
+	QFile* file = this->getFile(table);
 	bool result = file->setPermissions(QFile::WriteOther | QFile::ExeOther);
 	if (!file->open(QIODevice::WriteOnly| QIODevice::Text))
 	{

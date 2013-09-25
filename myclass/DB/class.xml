@@ -54,14 +54,5 @@
 		<num_learning_day>0</num_learning_day>
 		<note></note>
 	</class>
-	<class>
-		<id>7</id>
-		<name>Nguyen toefl</name>
-		<course_id>1</course_id>
-		<registration_day>2013-09-24</registration_day>
-		<total_day>20</total_day>
-		<num_learning_day>0</num_learning_day>
-		<note></note>
-	</class>
 </classes>
 

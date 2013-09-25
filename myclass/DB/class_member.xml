@@ -41,8 +41,12 @@
 		<member_id>12</member_id>
 	</class_member>
 	<class_member>
-		<class_id>7</class_id>
-		<member_id>13</member_id>
+		<class_id>3</class_id>
+		<member_id>16</member_id>
+	</class_member>
+	<class_member>
+		<class_id>6</class_id>
+		<member_id>17</member_id>
 	</class_member>
 </class_members>
 

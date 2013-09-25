@@ -127,7 +127,7 @@ QMap<QString,QString> databaseFile::searchMax(QString table, QString field)
 		
 	int numRow = listInfo.count();
 	if(numRow <= 0)
-		return itemReturn
+		return itemReturn;
 
 	// check if number
 	QMap<QString,QString> tempInfo = listInfo.at(0);

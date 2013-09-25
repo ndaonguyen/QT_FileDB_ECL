@@ -64,3 +64,14 @@
 #define LIST_COURSE_COL_3 80
 #define LIST_COURSE_COL_4 80
 #define LIST_COURSE_COL_5 80
+
+#define LIST_CLASS_TAB  0
+#define ADD_CLASS_TAB   1
+#define LIST_COURSE_TAB 2
+#define ADD_COURSE_TAB  3
+
+#define TEXT_LIST_CLASS  "List classs"
+#define TEXT_ADD_CLASS   "List classs"
+#define TEXT_LIST_COURSE "List classs"
+#define TEXT_ADD_COURSE  "List classs"
+

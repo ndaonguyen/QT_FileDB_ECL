@@ -61,9 +61,15 @@
 		<note></note>
 	</member>
 	<member>
-		<id>13</id>
-		<name>Nguen</name>
-		<birth_year>1988</birth_year>
+		<id>16</id>
+		<name>Hung</name>
+		<birth_year>1985</birth_year>
+		<note></note>
+	</member>
+	<member>
+		<id>17</id>
+		<name>Hung</name>
+		<birth_year>1985</birth_year>
 		<note></note>
 	</member>
 </members>

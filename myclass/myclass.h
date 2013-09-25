@@ -16,6 +16,7 @@
 #include "listCourseDialog.h"
 #include "listMemberDialog.h"
 
+#include "addClass.h"
 
 
 class MyClass : public QMainWindow

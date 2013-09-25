@@ -13,12 +13,15 @@ HEADERS += database.h \
            listCourseDialog.h \
            listMaterialDialog.h \
 		   listMemberDialog.h \
-           myclass.h
-FORMS += myclass.ui
+           myclass.h \
+		   addClass.h
+FORMS += myclass.ui \
+         addClass.ui
 SOURCES += databaseFile.cpp \
 		   listCourseDialog.cpp \
            listMaterialDialog.cpp \
            main.cpp \
 		   listMemberDialog.cpp \
-           myclass.cpp
+           myclass.cpp \
+		   addClass.cpp
 RESOURCES += myclass.qrc

@@ -2,7 +2,7 @@
 <classes>
 	<class>
 		<id>1</id>
-		<name>Nguyen IETLS</name>
+		<name>Nguyen IETLS edit</name>
 		<course_id>2</course_id>
 		<registration_day>2013-09-23</registration_day>
 		<total_day>30</total_day>
@@ -51,6 +51,24 @@
 		<course_id>2</course_id>
 		<registration_day>2013-09-24</registration_day>
 		<total_day>20</total_day>
+		<num_learning_day>0</num_learning_day>
+		<note></note>
+	</class>
+	<class>
+		<id>7</id>
+		<name>New Test 26.09 Edit</name>
+		<course_id>2</course_id>
+		<registration_day>2013-09-26</registration_day>
+		<total_day>20</total_day>
+		<num_learning_day>0</num_learning_day>
+		<note></note>
+	</class>
+	<class>
+		<id>8</id>
+		<name>Test lan cuoi</name>
+		<course_id>2</course_id>
+		<registration_day>2013-09-26</registration_day>
+		<total_day>30</total_day>
 		<num_learning_day>0</num_learning_day>
 		<note></note>
 	</class>

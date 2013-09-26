@@ -27,7 +27,7 @@ AddClass::~AddClass(void)
 
 void AddClass::setConnection()
 {
-	QObject::connect(ui.classComboBox, SIGNAL(activated(QString)),
+	QObject::connect(ui.courseComboBox, SIGNAL(activated(QString)),
 					this, SLOT(courseComboAction(QString)));
 	QObject::connect(ui.saveButton_2, SIGNAL(clicked()),
 					this, SLOT(saveClassAction()));
@@ -64,11 +64,14 @@ void AddClass:: loadConfigAddClass()
 	ui.addMemberTable->setColumnWidth(1,ADD_MEM_COL_2);
 	ui.addMemberTable->setColumnWidth(2,ADD_MEM_COL_3);
 
-	ui.classComboBox->addItem(tr("Choose course"));
+	clearItemsLayout(ui.courseInfoLayout);
+	ui.courseComboBox->clear();
+	ui.courseComboBox->addItem(tr("Choose course"));
 	QList< QMap<QString,QString> > coList = dbFile->getAll("course");
 	int numCourse = coList.count();
 	for(int i =0;i<numCourse;i++)
-		ui.classComboBox->addItem(coList.at(i)["name"]);
+		ui.courseComboBox->addItem(coList.at(i)["name"]);
+	ui.courseComboBox->setCurrentIndex(0);
 }
 
 /**
@@ -103,24 +106,19 @@ void AddClass:: loadAddModeInAddClassTab()
 {
 	skillModelList.clear();
 	skillTableList.clear();
-	skillIdList.clear();
-	
+	skillIdList.clear();	
 
 	ui.dayUseWidget->setVisible(false);
 	ui.courseInfoLabel->setText("");
 	ui.classNameLineEdit->setText("");
-	ui.totalDateLineEdit->setText("");
-	
+	ui.totalDateLineEdit->setText("");	
 	ui.otherLineEdit->setText("");
-	ui.classComboBox->clear();
-	ui.courseClassLabel->setText("");
-	clearItemsLayout(ui.courseInfoLayout);
+	ui.courseClassLabel->setText("");	
 
 	ui.classNameLineEdit->setFocus();
 	QDate curDate = QDate::currentDate();
-	ui.regisdateEdit->setDate(curDate);
+	ui.regisdateEdit->setDate(curDate);	
 	
-	ui.classComboBox->setCurrentIndex(0);
 	ui.enableClass1Button->setVisible(false);
 	ui.enableClass2Button->setVisible(false);
 	ui.enableClass3Button->setVisible(false);
@@ -520,7 +518,7 @@ void AddClass:: saveClassAction()
 			          << ui.totalDateLineEdit->text() << "0" <<ui.otherLineEdit->text();
 		QMap<QString,QString> classInsert = dbFile->insertItemWithKeyId("class",classListInfo);
 		if(classInsert.count() <= 0)
-			configAfterSaveClass();
+			return;
 		
 		//save members
 		QList<QString> memberList = getMemberListSaveClass();
@@ -566,7 +564,7 @@ void AddClass:: saveClassAction()
 			enableForEditing[INDEX_CLASS_INFO] = EDITCLASS_INFO_DISABLE;
 		}
 	}
-	configAfterSaveClass();
+	close();
 }
 
 
@@ -600,22 +598,6 @@ bool AddClass:: validateDataSaveClass()
 	return true;
 }
 
-void AddClass:: configAfterSaveClass()
-{
-	classID = ADD_MODE_CLASS;
-//	loadListClassTab();
-	loadDataAddClassTab(ADD_MODE_CLASS);
-/*
-	QWidget * tab = ui.mainTab->widget(LIST_CLASS_TAB);
-	ui.mainTab->setCurrentWidget(tab);
-	ui.mainTab->setTabEnabled(LIST_CLASS_TAB , true);
-	ui.mainTab->setTabEnabled(ADD_CLASS_TAB  , false);
-	ui.mainTab->setTabEnabled(LIST_COURSE_TAB, true);
-	ui.mainTab->setTabEnabled(ADD_COURSE_TAB , false);
-*/
-}
-
-
 void AddClass:: enableClassInfoAction() // in editing mode
 {	
 	ui.enableClass1Button->setVisible(false);
@@ -641,7 +623,8 @@ void AddClass:: enableCourseAction()
 
 void AddClass:: cancelClassAction()
 {
-	loadDataAddClassTab(ADD_MODE_CLASS);
+	close();
+//	loadDataAddClassTab(ADD_MODE_CLASS);
 //	loadListClassTab();
 //	ui.searchClassLineEdit->setText("");
 /*

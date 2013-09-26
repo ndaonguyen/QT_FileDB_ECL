@@ -58,7 +58,6 @@ public:
 
 	QList<QString> getMemberListSaveClass();
 	bool validateDataSaveClass();
-	void configAfterSaveClass();
 	void saveMembersInClass(QList<QString> memberList, QString classId);
 	
 

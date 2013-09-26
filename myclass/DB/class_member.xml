@@ -52,5 +52,33 @@
 		<class_id>1</class_id>
 		<member_id>18</member_id>
 	</class_member>
+	<class_member>
+		<class_id>7</class_id>
+		<member_id>19</member_id>
+	</class_member>
+	<class_member>
+		<class_id>7</class_id>
+		<member_id>20</member_id>
+	</class_member>
+	<class_member>
+		<class_id>7</class_id>
+		<member_id>21</member_id>
+	</class_member>
+	<class_member>
+		<class_id>1</class_id>
+		<member_id>22</member_id>
+	</class_member>
+	<class_member>
+		<class_id>8</class_id>
+		<member_id>23</member_id>
+	</class_member>
+	<class_member>
+		<class_id>8</class_id>
+		<member_id>24</member_id>
+	</class_member>
+	<class_member>
+		<class_id>8</class_id>
+		<member_id>25</member_id>
+	</class_member>
 </class_members>
 

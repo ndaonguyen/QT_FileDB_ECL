@@ -31,10 +31,7 @@ private:
 //	MYSQL *conn;
 	databaseFile *dbFile;
 
-// COURSE info
 	QStandardItemModel *listCourseModel;
-
-// CLASS info
 	QStandardItemModel *listClassModel;
 public:
 // COMMON
@@ -42,14 +39,11 @@ public:
 	void setHeaderTable(QStandardItemModel *model, QList<QString> listHeader);
 	void setEmptyRowTable(QStandardItemModel *model, int numRow);
 	bool isNumber(QString strCheck);
-	void loadOriginConfig();
 	QPushButton* addActionButton(QString typeButton, QString mappingType, QString mappingData, 
 								 QSignalMapper *mapper, bool isAddTextButton );
-// END COMMON
 
 	void loadConfigListClass();
 	void saveMembersInClass(QList<QString> memberList, QString classId);
-
 	void deleteCourse(QString courseId);
 
 // START: LIST CLASS TAB
@@ -58,42 +52,30 @@ public:
 	void loadDataAndHeaderListClass(QList< QMap<QString,QString> > resClass);
 	void loadListClassTab();  // main function
 	
-// END: LIST CLASS TAB
-
 
 //  START :LIST COURSE TAB
 	QString getSkillListStr(QString courseId);
 	void fillListCourse(QList< QMap<QString,QString> > materialRows,QTableView *listCourseTable,
 						QStandardItemModel *courseModel, int indexRow);
 	void loadListCourseTab();
-// END : LIST COURSE TAB
-
 
 	public slots:
 		void refreshAddClassAction();
-
-// ADD COURSE TAB
-	public slots:
 		void refreshAddCourseAction();
 
-
 // LIST COURSE TAB
-	public slots:
 		void searchCourseAction();
 		void refreshCourseListAction();
 		void loadCourseDialogAction(QString courseId);
 		void editCourseAction(QString courseId);
 		void deleteCourseAction(QString courseId);
 
-
-// START: LIST CLASS TAB
-	public slots:
+//  LIST CLASS TAB
 		void searchClassAction();
 		void refreshClassListAction();
 		void detailMemberAction(QString classId);
 		void editClassAction(QString classId);
 		void deleteClassAction(QString classId);
-// END: LIST CLASS TAB
 };
 
 #endif // MYCLASS_H

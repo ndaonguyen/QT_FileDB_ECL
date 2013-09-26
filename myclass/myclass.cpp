@@ -7,7 +7,6 @@ MyClass::MyClass(QWidget *parent, Qt::WFlags flags)
 	dbFile = new databaseFile();
 	setConnection();
 	loadListCourseTab();
-	loadOriginConfig();
 
 	loadConfigListClass();
 	loadListClassTab();
@@ -46,33 +45,6 @@ void MyClass::setConnection()
     QObject::connect(ui.searchCourseLineEdit, SIGNAL(returnPressed()),
 					this, SLOT(searchCourseAction()));
 
-	// add course
-    QObject::connect(ui.addMoreButton, SIGNAL(clicked()),
-		             this, SLOT(refreshAddCourseAction()));
-    QObject::connect(ui.leftWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
-					this, SLOT(left2RightClickAction()));
-    QObject::connect(ui.rightWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
-					this, SLOT(right2LeftClickAction()));
-    QObject::connect(ui.left2RightButton, SIGNAL(clicked()),
-					this, SLOT(left2RightAction()));
-    QObject::connect(ui.right2LeftButton, SIGNAL(clicked()),
-					this, SLOT(right2LeftAction()));
-    QObject::connect(ui.all2RightButton, SIGNAL(clicked()),
-					this, SLOT(all2RightAction()));
-    QObject::connect(ui.all2LeftButton, SIGNAL(clicked()),
-					this, SLOT(all2LeftAction()));
-    QObject::connect(ui.addSkill, SIGNAL(clicked()),
-					this, SLOT(addSkillAction()));
-    QObject::connect(ui.cancelCourseButton, SIGNAL(clicked()),
-					this, SLOT(cancelCourseAction()));
-	QObject::connect(ui.saveButton,SIGNAL(clicked()),
-					this, SLOT(step1SaveAction()));
-	QObject::connect(ui.courseNameLineEdit,SIGNAL(returnPressed()),
-					this, SLOT(step1SaveAction()));
-	QObject::connect(ui.saveButton2,SIGNAL(clicked()),
-					this, SLOT(step2SaveAction()));
-	QObject::connect(ui.saveCourseButton,SIGNAL(clicked()),
-					this, SLOT(saveCourseAction()));
 }
 
 /**
@@ -99,14 +71,6 @@ void MyClass::setEmptyRowTable(QStandardItemModel *model, int numRow)
 			model->setItem(rowIndex,i, new QStandardItem(tr("")));
 		rowIndex ++;
 	}
-}
-
-void MyClass::loadOriginConfig()
-{
-	ui.mainTab->setTabEnabled(LIST_CLASS_TAB ,true);
-	ui.mainTab->setTabEnabled(ADD_CLASS_TAB  ,false);
-	ui.mainTab->setTabEnabled(LIST_COURSE_TAB,true);
-	ui.mainTab->setTabEnabled(ADD_COURSE_TAB ,false);
 }
 
 bool MyClass:: isNumber(QString strCheck)

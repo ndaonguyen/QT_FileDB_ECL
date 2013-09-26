@@ -73,7 +73,7 @@
 				Name="VCLinkerTool"
 				IgnoreImportLibrary="true"
 				AdditionalOptions="&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot;"
-				AdditionalDependencies="c:\Qt\4.8.5\lib\qtmaind.lib c:\Qt\4.8.5\lib\QtGuid4.lib c:\Qt\4.8.5\lib\QtCored4.lib C:\wamp32\bin\mysql\mysql5.5.16\lib\libmysql.lib"
+				AdditionalDependencies="c:\Qt\4.8.5\lib\qtmaind.lib c:\Qt\4.8.5\lib\QtGuid4.lib c:\Qt\4.8.5\lib\QtCored4.lib"
 				OutputFile="$(OutDir)\myclass.exe"
 				SuppressStartupBanner="true"
 				AdditionalLibraryDirectories="c:\Qt\4.8.5\lib"
@@ -208,6 +208,10 @@
 				>
 			</File>
 			<File
+				RelativePath="addCourse.cpp"
+				>
+			</File>
+			<File
 				RelativePath="databaseFile.cpp"
 				>
 			</File>
@@ -260,6 +264,32 @@
 						CommandLine="C:\Qt\4.8.5\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I&quot;c:\Qt\4.8.5\include\QtCore&quot; -I&quot;c:\Qt\4.8.5\include\QtGui&quot; -I&quot;c:\Qt\4.8.5\include&quot; -I&quot;.&quot; -I&quot;c:\Qt\4.8.5\include\ActiveQt&quot; -I&quot;release&quot; -I&quot;.&quot; -Ic:\Qt\4.8.5\mkspecs\default -D_MSC_VER=1500 -DWIN32 addClass.h -o release\moc_addClass.cpp&#x0D;&#x0A;"
 						AdditionalDependencies="C:\Qt\4.8.5\bin\moc.exe;addClass.h"
 						Outputs="release\moc_addClass.cpp"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="addCourse.h"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC addCourse.h"
+						CommandLine="C:\Qt\4.8.5\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I&quot;c:\Qt\4.8.5\include\QtCore&quot; -I&quot;c:\Qt\4.8.5\include\QtGui&quot; -I&quot;c:\Qt\4.8.5\include&quot; -I&quot;.&quot; -I&quot;c:\Qt\4.8.5\include\ActiveQt&quot; -I&quot;debug&quot; -I&quot;.&quot; -Ic:\Qt\4.8.5\mkspecs\default -D_MSC_VER=1500 -DWIN32 addCourse.h -o debug\moc_addCourse.cpp&#x0D;&#x0A;"
+						AdditionalDependencies="C:\Qt\4.8.5\bin\moc.exe;addCourse.h"
+						Outputs="debug\moc_addCourse.cpp"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC addCourse.h"
+						CommandLine="C:\Qt\4.8.5\bin\moc.exe  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -I&quot;c:\Qt\4.8.5\include\QtCore&quot; -I&quot;c:\Qt\4.8.5\include\QtGui&quot; -I&quot;c:\Qt\4.8.5\include&quot; -I&quot;.&quot; -I&quot;c:\Qt\4.8.5\include\ActiveQt&quot; -I&quot;release&quot; -I&quot;.&quot; -Ic:\Qt\4.8.5\mkspecs\default -D_MSC_VER=1500 -DWIN32 addCourse.h -o release\moc_addCourse.cpp&#x0D;&#x0A;"
+						AdditionalDependencies="C:\Qt\4.8.5\bin\moc.exe;addCourse.h"
+						Outputs="release\moc_addCourse.cpp"
 					/>
 				</FileConfiguration>
 			</File>
@@ -357,12 +387,40 @@
 					/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath=".\ui_addCourse_cop.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Generated Files"
 			Filter="cpp;c;cxx;moc;h;def;odl;idl;res;"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
+			<File
+				RelativePath="release\moc_addCourse.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="debug\moc_addCourse.cpp"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
 			<File
 				RelativePath="release\moc_listMaterialDialog.cpp"
 				>
@@ -464,6 +522,10 @@
 				>
 			</File>
 			<File
+				RelativePath="ui_addCourse.h"
+				>
+			</File>
+			<File
 				RelativePath="ui_myclass.h"
 				>
 			</File>
@@ -497,6 +559,32 @@
 						CommandLine="C:\Qt\4.8.5\bin\uic.exe addClass.ui -o ui_addClass.h&#x0D;&#x0A;"
 						AdditionalDependencies="C:\Qt\4.8.5\bin\uic.exe;addClass.ui"
 						Outputs="ui_addClass.h"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="addCourse.ui"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="UIC addCourse.ui"
+						CommandLine="C:\Qt\4.8.5\bin\uic.exe addCourse.ui -o ui_addCourse.h&#x0D;&#x0A;"
+						AdditionalDependencies="C:\Qt\4.8.5\bin\uic.exe;addCourse.ui"
+						Outputs="ui_addCourse.h"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="UIC addCourse.ui"
+						CommandLine="C:\Qt\4.8.5\bin\uic.exe addCourse.ui -o ui_addCourse.h&#x0D;&#x0A;"
+						AdditionalDependencies="C:\Qt\4.8.5\bin\uic.exe;addCourse.ui"
+						Outputs="ui_addCourse.h"
 					/>
 				</FileConfiguration>
 			</File>

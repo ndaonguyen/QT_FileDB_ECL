@@ -19,12 +19,6 @@
 		<note></note>
 	</member>
 	<member>
-		<id>6</id>
-		<name>Hung</name>
-		<birth_year>2000</birth_year>
-		<note></note>
-	</member>
-	<member>
 		<id>7</id>
 		<name>Nguyen</name>
 		<birth_year>1988</birth_year>
@@ -75,7 +69,7 @@
 	<member>
 		<id>18</id>
 		<name>Cac</name>
-		<birth_year>1988</birth_year>
+		<birth_year>2000</birth_year>
 		<note></note>
 	</member>
 	<member>
@@ -99,7 +93,7 @@
 	<member>
 		<id>22</id>
 		<name>Be hehe</name>
-		<birth_year>1090</birth_year>
+		<birth_year>2000</birth_year>
 		<note></note>
 	</member>
 	<member>
@@ -118,6 +112,12 @@
 		<id>25</id>
 		<name>hehun</name>
 		<birth_year>1980</birth_year>
+		<note></note>
+	</member>
+	<member>
+		<id>26</id>
+		<name>Hung</name>
+		<birth_year>2000</birth_year>
 		<note></note>
 	</member>
 </members>

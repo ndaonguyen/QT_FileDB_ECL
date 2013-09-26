@@ -521,7 +521,7 @@ public:
         retranslateUi(myclassClass);
         QObject::connect(mainTab, SIGNAL(currentChanged(int)), myclassClass, SLOT(tabChangeAction(int)));
 
-        mainTab->setCurrentIndex(0);
+        mainTab->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(myclassClass);

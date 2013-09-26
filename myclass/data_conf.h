@@ -15,6 +15,7 @@
 #define EDITCLASS_COURSE_DISABLE false
 
 #define ADD_MODE_CLASS 0
+#define ADD_MODE_COURSE 0
 
 #define MATER_BOX_COL_1 50
 #define MATER_BOX_COL_2 200
@@ -44,6 +45,8 @@
 
 #define CREATE_COURSE_MODE "CREATE"
 #define EDIT_COURSE_MODE   "EDIT"
+
+
 
 #define IN
 #define OUT

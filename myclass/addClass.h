@@ -7,7 +7,7 @@
 #include "data_conf.h"
 #include "databaseFile.h"
 
-class AddClass :public QDialog//, public Ui::Form
+class AddClass :public QDialog
 {
 	Q_OBJECT
 public:
@@ -33,14 +33,12 @@ public:
 	bool checkItemExist(QString itemCheck, QList<QString> listItems);
 	QPushButton* addActionButton(QString typeButton, QString mappingType, QString mappingData, 
 								 QSignalMapper *mapper, bool isAddTextButton );
-
 	
 	QList<QString> getMemIdInClass(int classiD);
 	void deleteMemberById(QString memberId);
 	void editMember();
 	void editCourse();
-	void editClass();
-	
+	void editClass();	
 
 	void addUseCheckBox(QString courseNameEdit,QString courseNameChoose);  // use for load course in edit class
 	bool checkCourseNew(QString courseCompare, int classiD );
@@ -60,10 +58,6 @@ public:
 	bool validateDataSaveClass();
 	void saveMembersInClass(QList<QString> memberList, QString classId);
 	
-
-	
-
-
 private slots:
 	void courseComboAction(QString courseStr);
 	void saveClassAction();
@@ -72,7 +66,5 @@ private slots:
 	void enableCourseAction();
 	void cancelClassAction();
 	void delMaterialTable(QString materialNSkillIndex);	
-
-
 	void delMemberRowAction(QString memberId);
 };

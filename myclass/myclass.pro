@@ -15,14 +15,18 @@ HEADERS += database.h \
 		   listMemberDialog.h \
            myclass.h \
 		   addClass.h \
-		   data_conf.h
+		   addCourse.h \
+		   data_conf.h \
+		   ui_addCourse_cop.h
 FORMS += myclass.ui \
-         addClass.ui
+         addClass.ui \
+		 addCourse.ui
 SOURCES += databaseFile.cpp \
 		   listCourseDialog.cpp \
            listMaterialDialog.cpp \
            main.cpp \
 		   listMemberDialog.cpp \
            myclass.cpp \
-		   addClass.cpp
+		   addClass.cpp \
+		   addCourse.cpp
 RESOURCES += myclass.qrc

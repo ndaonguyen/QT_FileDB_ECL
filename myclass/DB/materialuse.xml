@@ -7,18 +7,6 @@
 		<status>0</status>
 	</materialuse>
 	<materialuse>
-		<material_id>2</material_id>
-		<class_id>2</class_id>
-		<skill_id>1</skill_id>
-		<status>0</status>
-	</materialuse>
-	<materialuse>
-		<material_id>3</material_id>
-		<class_id>2</class_id>
-		<skill_id>1</skill_id>
-		<status>0</status>
-	</materialuse>
-	<materialuse>
 		<material_id>4</material_id>
 		<class_id>2</class_id>
 		<skill_id>1</skill_id>
@@ -80,18 +68,6 @@
 	</materialuse>
 	<materialuse>
 		<material_id>1</material_id>
-		<class_id>3</class_id>
-		<skill_id>1</skill_id>
-		<status>0</status>
-	</materialuse>
-	<materialuse>
-		<material_id>2</material_id>
-		<class_id>3</class_id>
-		<skill_id>1</skill_id>
-		<status>0</status>
-	</materialuse>
-	<materialuse>
-		<material_id>3</material_id>
 		<class_id>3</class_id>
 		<skill_id>1</skill_id>
 		<status>0</status>
@@ -181,18 +157,6 @@
 		<status>0</status>
 	</materialuse>
 	<materialuse>
-		<material_id>2</material_id>
-		<class_id>4</class_id>
-		<skill_id>1</skill_id>
-		<status>0</status>
-	</materialuse>
-	<materialuse>
-		<material_id>3</material_id>
-		<class_id>4</class_id>
-		<skill_id>1</skill_id>
-		<status>0</status>
-	</materialuse>
-	<materialuse>
 		<material_id>4</material_id>
 		<class_id>4</class_id>
 		<skill_id>1</skill_id>
@@ -272,18 +236,6 @@
 	</materialuse>
 	<materialuse>
 		<material_id>1</material_id>
-		<class_id>5</class_id>
-		<skill_id>1</skill_id>
-		<status>0</status>
-	</materialuse>
-	<materialuse>
-		<material_id>2</material_id>
-		<class_id>5</class_id>
-		<skill_id>1</skill_id>
-		<status>0</status>
-	</materialuse>
-	<materialuse>
-		<material_id>3</material_id>
 		<class_id>5</class_id>
 		<skill_id>1</skill_id>
 		<status>0</status>

@@ -14,7 +14,8 @@ HEADERS += database.h \
            listMaterialDialog.h \
 		   listMemberDialog.h \
            myclass.h \
-		   addClass.h
+		   addClass.h \
+		   data_conf.h
 FORMS += myclass.ui \
          addClass.ui
 SOURCES += databaseFile.cpp \

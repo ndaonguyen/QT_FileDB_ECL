@@ -71,7 +71,9 @@
 #define ADD_COURSE_TAB  3
 
 #define TEXT_LIST_CLASS  "List classs"
-#define TEXT_ADD_CLASS   "List classs"
-#define TEXT_LIST_COURSE "List classs"
-#define TEXT_ADD_COURSE  "List classs"
+#define TEXT_ADD_CLASS   "Add classs"
+#define TEXT_LIST_COURSE "List course"
+#define TEXT_ADD_COURSE  "Add course"
+
+#define DEFAULT_COURSE_BOX "Choose course"
 

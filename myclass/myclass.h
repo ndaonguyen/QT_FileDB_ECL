@@ -41,12 +41,12 @@ private:
 
 // CLASS info
 	QStandardItemModel *listClassModel;
-	QStandardItemModel *addMemberModel;
-	QList<QStandardItemModel*> skillModelList; // list contain material ( set current situation) // ADD CLASS
-	QList<QTableView*>  skillTableList; // list contain material   // ADD CLASS
-	QList<QString> skillIdList;     // skill of contain material   // ADD CLASS
-	int classID; // != 0 : edit mode . =0: save
-	QList<bool> enableForEditing;  // order:  class info, member, course
+//	QStandardItemModel *addMemberModel;
+//	QList<QStandardItemModel*> skillModelList; // list contain material ( set current situation) // ADD CLASS
+//	QList<QTableView*>  skillTableList; // list contain material   // ADD CLASS
+//	QList<QString> skillIdList;     // skill of contain material   // ADD CLASS
+//	int classID; // != 0 : edit mode . =0: save
+//	QList<bool> enableForEditing;  // order:  class info, member, course
 public:
 // COMMON
 	void setConnection();
@@ -57,34 +57,36 @@ public:
 	bool isItemExist(QString item,QListWidget *list);
 	void clearItemsLayout(QLayout* layout);
 	void loadOriginConfig();
-	QPushButton* addActionButton(QString typeButton, QString mappingType, QString mappingData, QSignalMapper *mapper, bool isAddTextButton );
+	QPushButton* addActionButton(QString typeButton, QString mappingType, QString mappingData, 
+								 QSignalMapper *mapper, bool isAddTextButton );
 // END COMMON
 
 // START : ADD CLASS TAB
 	// START ---- edit class
-	QList<QString> getMemIdInClass(int classiD);
-	void deleteMemberById(QString memberId);
-	void editMember();
-	void editCourse();
-	void editClass();
-	void addUseCheckBox(QString courseNameEdit,QString courseNameChoose);  // use for load course in edit class
-	void loadBasicInfoAddClassTab(QMap<QString,QString> classInfo);
-	void loadMemberAddClassTab(QString classIdStr);
-	void loadConfigEditInAddClassTab();
+//	QList<QString> getMemIdInClass(int classiD);
+//	void deleteMemberById(QString memberId);
+//	void editMember();
+//	void editCourse();
+//	void editClass();
+//	void addUseCheckBox(QString courseNameEdit,QString courseNameChoose);  // use for load course in edit class
+//	void loadBasicInfoAddClassTab(QMap<QString,QString> classInfo);
+//	void loadMemberAddClassTab(QString classIdStr);
+//	void loadConfigEditInAddClassTab();
 	// END --- edit class
-	void loadConfigClass();
-	void loadDataAddClassTab(int classId);
-	void loadAddModeInAddClassTab();
+	void loadConfigListClass();
+//	void loadConfigAddClass();
+//	void loadDataAddClassTab(int classId);
+//	void loadAddModeInAddClassTab();
 	
-	void setSizeMaterialBox(QTableView *skillTable );
-	bool checkCourseNew(QString courseCompare, int classiD );
-	void setSkillLabelInMaBox(QString skillId);
-	void fillMaterialForEachSkill(QList< QMap<QString,QString> > resMaterialUse, int skillIndex, 
-								  QTableView *skillTable, QStandardItemModel *skillModel);
-	void fillMaterial4AddMember(QString courseIdStr); // **
-	QList<QString> getMemberListSaveClass();
-	bool validateDataSaveClass();
-	void configAfterSaveClass();
+//	void setSizeMaterialBox(QTableView *skillTable );
+//	bool checkCourseNew(QString courseCompare, int classiD );
+//	void setSkillLabelInMaBox(QString skillId);
+//	void fillMaterialForEachSkill(QList< QMap<QString,QString> > resMaterialUse, int skillIndex, 
+//								  QTableView *skillTable, QStandardItemModel *skillModel);
+//	void fillMaterial4AddMember(QString courseIdStr); // **
+//	QList<QString> getMemberListSaveClass();
+//	bool validateDataSaveClass();
+//	void configAfterSaveClass();
 	void saveMembersInClass(QList<QString> memberList, QString classId);
 // END   : ADD CLASS TAB
 
@@ -128,14 +130,14 @@ public:
 
 // START : ADD CLASS TAB
 	public slots:
-		void enableClassInfoAction();
-		void enableMemberAction();
-		void enableCourseAction();
+//		void enableClassInfoAction();
+//		void enableMemberAction();
+//		void enableCourseAction();
 		void refreshAddClassAction();
-		void cancelClassAction();
-		void delMaterialTable(QString materialNSkillIndex);		
-		void saveClassAction();		
-		void courseComboAction(QString courseStr);
+//		void cancelClassAction();
+//		void delMaterialTable(QString materialNSkillIndex);		
+//		void saveClassAction();		
+//		void courseComboAction(QString courseStr);
 // END   : ADD CLASS TAB
 
 
@@ -187,7 +189,7 @@ public:
 		void searchClassAction();
 		void refreshClassListAction();
 		void detailMemberAction(QString classId);
-		void delMemberRowAction(QString memberId);
+//		void delMemberRowAction(QString memberId);
 		void editClassAction(QString classId);
 		void deleteClassAction(QString classId);
 // END: LIST CLASS TAB

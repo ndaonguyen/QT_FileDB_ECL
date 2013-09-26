@@ -10,8 +10,9 @@ MyClass::MyClass(QWidget *parent, Qt::WFlags flags)
 	loadListCourseTab();
 	loadOriginConfig();
 
-	loadConfigClass();
-	loadDataAddClassTab(0);
+	loadConfigListClass();
+//	loadConfigAddClass();
+//	loadDataAddClassTab(ADD_MODE_CLASS);
 	loadListClassTab();
 }
 
@@ -26,15 +27,7 @@ MyClass::~MyClass()
 		delete skillWidgets.at(i);
 
 	delete listClassModel;
-	delete addMemberModel;
 
-	int skillModelListCount = skillModelList.count();
-	for(int i=0;i<skillModelListCount;i++)
-		delete skillModelList.at(i);
-
-	int skillTableListCount = skillTableList.count();
-	for(int i=0;i<skillTableListCount;i++)
-		delete skillTableList.at(i);
 }
 
 /**
@@ -134,6 +127,7 @@ void MyClass::setEmptyRowTable(QStandardItemModel *model, int numRow)
 		rowIndex ++;
 	}
 }
+
 void MyClass::loadOriginConfig()
 {
 	ui.mainTab->setTabEnabled(LIST_CLASS_TAB ,true);
@@ -141,6 +135,7 @@ void MyClass::loadOriginConfig()
 	ui.mainTab->setTabEnabled(LIST_COURSE_TAB,true);
 	ui.mainTab->setTabEnabled(ADD_COURSE_TAB ,false);
 }
+
 
 void MyClass:: clearItemsLayout(QLayout* layout)
 {
@@ -155,6 +150,7 @@ void MyClass:: clearItemsLayout(QLayout* layout)
 			delete item->widget();
 	}
 }
+
 
 bool MyClass:: isNumber(QString strCheck)
 {
@@ -230,6 +226,7 @@ QPushButton* MyClass:: addActionButton(QString typeButton, QString mappingType,
 /**
   * edit memeber In Edit Class Step 
   */
+/*
 void MyClass::editMember()
 {
 	QList<QString> exMemberIdList = getMemIdInClass(classID);
@@ -274,7 +271,8 @@ void MyClass::editMember()
 	for(int j =0;j<numExMember;j++)
 		deleteMemberById(exMemberIdList.at(j));
 }
-
+*/
+/*
 QList<QString> MyClass:: getMemIdInClass(int classId)
 {
 	QList< QMap<QString,QString> > resClassMember = dbFile->getListByField("class_member","class_id",
@@ -286,19 +284,22 @@ QList<QString> MyClass:: getMemIdInClass(int classId)
 
 	return exMemberIdList;
 }
-
+*/
 /**
   * Delete member ( member and member_class table) 
   */ 
+/*
 void MyClass:: deleteMemberById(QString memberId)
 {
 	dbFile->deleteByField("class_member","member_id",memberId);
 	dbFile->deleteByField("member","id",memberId);
 }
+*/
 
 /**
   * edit course in Edit Class step. 
   */
+/*
 void MyClass::editCourse()
 {
 	QString cName       = ui.courseClassLabel->text();
@@ -340,10 +341,11 @@ void MyClass::editCourse()
 		}
 	}
 }
-
+*/
 /**
   * edit information of class in Edit Class step.
   */
+/*
 void MyClass:: editClass()
 {
 	QString cName       = ui.courseClassLabel->text();
@@ -355,11 +357,12 @@ void MyClass:: editClass()
 				  <<ui.totalDateLineEdit->text()<<ui.dayUseSpinBox->text() << ui.otherLineEdit->text();
 	dbFile->editById("class",QString::number(classID),classListInfo);
 }
-
+*/
 /**
   * use for load course in edit class( load checkbox to let that material use not not use)
   * if new course equal ex course -> no load. Otherwise, load ;)
   */
+/*
 void MyClass:: addUseCheckBox(QString courseNameEdit,QString courseNameChoose)  
 {
 	if(courseNameEdit.trimmed()!=courseNameChoose.trimmed())
@@ -399,22 +402,29 @@ void MyClass:: addUseCheckBox(QString courseNameEdit,QString courseNameChoose)
 		}
 	}
 }
+*/
 
 /**
   * load confif of list class and add class at the constructor
   */
-void MyClass:: loadConfigClass()
+void MyClass:: loadConfigListClass()
+{
+	listClassModel = new QStandardItemModel(this); 
+	ui.listClassTable->setModel(listClassModel);
+}
+
+/*
+void MyClass:: loadConfigAddClass()
 {
 	addMemberModel = new QStandardItemModel(this);
 	ui.addMemberTable->setModel(addMemberModel);
-	
-	listClassModel = new QStandardItemModel(this); 
-	ui.listClassTable->setModel(listClassModel);
 
 	classID = ADD_MODE_CLASS;
 	ui.dayUseWidget->setVisible(false);
 }
+*/
 
+/*
 void MyClass:: loadAddModeInAddClassTab()
 {
 	enableForEditing.append(EDITCLASS_INFO_DISABLE);
@@ -470,7 +480,9 @@ void MyClass:: loadAddModeInAddClassTab()
 	ui.courseInfoLabel->setEnabled(true);
 	ui.courseInfoWidget->setEnabled(true);
 }
+*/
 
+/*
 void MyClass:: loadConfigEditInAddClassTab()
 {
 	ui.enableClass1Button->setVisible(true);
@@ -494,7 +506,9 @@ void MyClass:: loadConfigEditInAddClassTab()
 	ui.addMemberTable->setColumnWidth(4,ADD_MEM_COL_5);
 	ui.addMemberTable->setColumnHidden(4,true);
 }
+*/
 
+/*
 void MyClass:: loadBasicInfoAddClassTab(QMap<QString,QString> classInfo)
 {
 	QString numLearnDay = classInfo["num_learning_day"];
@@ -509,7 +523,8 @@ void MyClass:: loadBasicInfoAddClassTab(QMap<QString,QString> classInfo)
 	dateIn.setDate(dateList.at(0).toInt(),dateList.at(1).toInt(),dateList.at(2).toInt());
 	ui.regisdateEdit->setDate(dateIn);
 }
-
+*/
+/*
 void MyClass::loadMemberAddClassTab(QString classIdStr)
 {
 	QList< QMap<QString,QString> > resClassMember = dbFile->getListByField("class_member","class_id",classIdStr);
@@ -530,11 +545,13 @@ void MyClass::loadMemberAddClassTab(QString classIdStr)
 		ui.addMemberTable->setIndexWidget(addMemberModel->index(rowIndex,3),deleteButton);
 	}
 }
+*/
 
 /**
   * Load data to Add Class tab with two method (create, edit) : base on ClassId 
   * @param classId 0:create  #0: edit
   */
+/*
 void MyClass:: loadDataAddClassTab(int classId)
 {
 	if(classId == ADD_MODE_CLASS)
@@ -558,6 +575,9 @@ void MyClass:: loadDataAddClassTab(int classId)
 		courseComboAction(courseRow.at(0)["name"]);// load material of skills + add radio button use/ not use
 	}
 }
+*/
+
+/*
 bool MyClass:: checkCourseNew(QString courseCompare, int classId )
 {
 	QList< QMap<QString,QString> > classRow = dbFile->getListByField("class","id",QString::number(classId));
@@ -570,29 +590,32 @@ bool MyClass:: checkCourseNew(QString courseCompare, int classId )
 	}
 	return isCourseEditMode;
 }
-
+*/
+/*
 void MyClass:: setSizeMaterialBox(QTableView *skillTable )
 {
 	skillTable->setColumnWidth(0,MATER_BOX_COL_1);
 	skillTable->setColumnWidth(1,MATER_BOX_COL_2);
 	skillTable->setColumnWidth(2,MATER_BOX_COL_3);
 }
-
+*/
 /**
   * Set skill label In Material Box
   */
+/*
 void MyClass:: setSkillLabelInMaBox(QString skillId)
 {
 	QList< QMap<QString,QString> > skList = dbFile->getListByField("skill", "id", skillId);
 	QLabel *skillLabel = new QLabel(tr("<b>")+skList.at(0)["name"]+tr("</b>"));
 	ui.courseInfoLayout->addWidget(skillLabel);
 }
-
+*/
 /**
   * Parameter: materialRes --> List material
   *            skillIndex  --> index of skill to insert to list (skillIdList)
   *			   skillTable & skillModel : table and view of that TableView skill
   */
+/*
 void MyClass:: fillMaterialForEachSkill(QList< QMap<QString,QString> > skMaList, int skillIndex, 
 								  QTableView *skillTable, QStandardItemModel *skillModel)
 {
@@ -612,11 +635,12 @@ void MyClass:: fillMaterialForEachSkill(QList< QMap<QString,QString> > skMaList,
 		skillTable->setIndexWidget(skillModel->index(rowIndex,2),deleteButton);
 	}
 }
-
+*/
 /**
   *	Fill Course info : able to delete material ( but not edit). In edit | create mode --> # code
   * @param courseIdStr : course_id --> to load data
   */
+/*
 void MyClass:: fillMaterial4AddMember(QString courseIdStr)
 {	
 	bool isCourseEditMode = checkCourseNew(courseIdStr, classID );
@@ -674,6 +698,7 @@ void MyClass:: fillMaterial4AddMember(QString courseIdStr)
 		ui.courseInfoLayout->addWidget(skillTable);
 	}
 }
+*/
 
 // ----------------------------- ADD COURSE TAB
 void MyClass:: deleteCourse(QString courseId) // delete course base on course id --> delete all thing related to course
@@ -1143,6 +1168,7 @@ void MyClass:: loadListCourseTab()
 
 // SLOT
 // -------------------------  ADD CLASS TAB
+/*
 void MyClass:: enableClassInfoAction() // in editing mode
 {	
 	ui.enableClass1Button->setVisible(false);
@@ -1165,9 +1191,10 @@ void MyClass:: enableCourseAction()
 	ui.courseInfoWidget->setEnabled(true);
 	enableForEditing[INDEX_COURSE_INFO] = EDITCLASS_COURSE_ENABLE;
 }
-
+*/
 void MyClass:: refreshAddClassAction()
-{	
+{
+	/*
 	loadDataAddClassTab(ADD_MODE_CLASS);
 	QWidget * tab = ui.mainTab->widget(ADD_CLASS_TAB);
 	ui.mainTab->setCurrentWidget(tab);
@@ -1177,12 +1204,14 @@ void MyClass:: refreshAddClassAction()
 	ui.mainTab->setTabEnabled(ADD_CLASS_TAB  ,true);
 	ui.mainTab->setTabEnabled(LIST_COURSE_TAB,false);
 	ui.mainTab->setTabEnabled(ADD_COURSE_TAB ,false);
-/*
-	AddClass addClassDialog;
-	addClassDialog.exec();
-*/
+	*/
+	AddClass *addClassDialog = new AddClass(0,0, dbFile, ADD_MODE_CLASS); ;
+	addClassDialog->exec();
+	ui.searchClassLineEdit->setText("");
+	loadListClassTab();
 }
 
+/*
 void MyClass:: cancelClassAction()
 {
 	loadDataAddClassTab(ADD_MODE_CLASS);
@@ -1197,12 +1226,14 @@ void MyClass:: cancelClassAction()
 	ui.mainTab->setTabEnabled(LIST_COURSE_TAB,true);
 	ui.mainTab->setTabEnabled(ADD_COURSE_TAB ,false);
 }
+*/
 
 /**
   * delete material in skill box info
   * @param materialNSkillIndex : "<material name> , <skill Index>"
   * skillindex : in skillModelList and skillTableList
   */
+/*
 void MyClass::delMaterialTable(QString materialNSkillIndex)
 {
 	QStringList arr    = materialNSkillIndex.split(",");
@@ -1222,7 +1253,8 @@ void MyClass::delMaterialTable(QString materialNSkillIndex)
 		}
 	}
 }
-
+*/
+/*
 QList<QString> MyClass::getMemberListSaveClass()
 {
 	int rowMember = addMemberModel->rowCount();
@@ -1244,7 +1276,8 @@ QList<QString> MyClass::getMemberListSaveClass()
 	}
 	return memberList;
 }
-
+*/
+/*
 bool MyClass:: validateDataSaveClass()
 {
 	if (ui.classNameLineEdit->text()=="")
@@ -1274,7 +1307,8 @@ bool MyClass:: validateDataSaveClass()
 
 	return true;
 }
-
+*/
+/*
 void MyClass::saveMembersInClass(QList<QString> memberList, QString classId)
 {
 	int numMember             = memberList.count();
@@ -1298,10 +1332,11 @@ void MyClass::saveMembersInClass(QList<QString> memberList, QString classId)
 		dbFile->insertItemWithoutKeyId("class_member",classMemberInsert);
 	}
 }
-
+*/
 /**
   * Check data before saving
   */
+/*
 void MyClass:: saveClassAction()
 {
 	// validate data
@@ -1365,12 +1400,13 @@ void MyClass:: saveClassAction()
 	}
 	configAfterSaveClass();
 }
-
+*/
+/*
 void MyClass:: configAfterSaveClass()
 {
 	classID = ADD_MODE_CLASS;
 	loadListClassTab();
-	loadDataAddClassTab(0);
+	loadDataAddClassTab(ADD_MODE_CLASS);
 	QWidget * tab = ui.mainTab->widget(LIST_CLASS_TAB);
 
 	ui.mainTab->setCurrentWidget(tab);
@@ -1379,10 +1415,11 @@ void MyClass:: configAfterSaveClass()
 	ui.mainTab->setTabEnabled(LIST_COURSE_TAB, true);
 	ui.mainTab->setTabEnabled(ADD_COURSE_TAB , false);
 }
-
+*/
 /**
   * when choose course in combox box -> load material up to that course choosen
   */
+/*
 void MyClass:: courseComboAction(QString courseStr)
 {
 	clearItemsLayout(ui.courseInfoLayout);
@@ -1409,6 +1446,7 @@ void MyClass:: courseComboAction(QString courseStr)
 
 	addUseCheckBox(coList.at(0)["name"],courseStr);
 }
+*/
 
 //SLOT
 // ----------- ADD COURSE TAB 
@@ -1733,7 +1771,7 @@ void MyClass:: detailMemberAction(QString classId)
 	listMemberDialog *dialog = new listMemberDialog(this,dbFile,classId);
 	dialog->exec();
 }
-
+/*
 void MyClass:: delMemberRowAction(QString memberId) //Edit class - member 
 {
 	int numRow = addMemberModel->rowCount();
@@ -1747,11 +1785,13 @@ void MyClass:: delMemberRowAction(QString memberId) //Edit class - member
 		}
 	}
 }
+*/
 
 void MyClass:: editClassAction(QString classId)
 {
-	classID = classId.toInt();
+//	classID = classId.toInt();
 	
+/*
 	ui.mainTab->setTabEnabled(LIST_CLASS_TAB ,false);
 	ui.mainTab->setTabEnabled(ADD_CLASS_TAB  ,true);
 	ui.mainTab->setTabEnabled(LIST_COURSE_TAB,false);
@@ -1759,8 +1799,12 @@ void MyClass:: editClassAction(QString classId)
 
 	QWidget * tab = ui.mainTab->widget(ADD_CLASS_TAB);
 	ui.mainTab->setCurrentWidget(tab);
-
-	loadDataAddClassTab(classID);
+*/
+//	loadDataAddClassTab(classId.toInt());
+	AddClass *addClassDialog = new AddClass(0,0, dbFile, classId); ;
+	addClassDialog->exec();
+	loadListClassTab();
+	ui.searchClassLineEdit->setText("");
 }
 
 void MyClass:: deleteClassAction(QString classId)

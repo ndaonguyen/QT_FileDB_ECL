@@ -264,6 +264,10 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="data_conf.h"
+				>
+			</File>
+			<File
 				RelativePath="database.h"
 				>
 			</File>
@@ -359,30 +363,6 @@
 			Filter="cpp;c;cxx;moc;h;def;odl;idl;res;"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
-			<File
-				RelativePath="release\moc_addClass.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath="debug\moc_addClass.cpp"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
 			<File
 				RelativePath="release\moc_listMaterialDialog.cpp"
 				>

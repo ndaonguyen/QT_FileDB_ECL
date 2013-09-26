@@ -388,6 +388,10 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\ui_addClass_cop.h"
+				>
+			</File>
+			<File
 				RelativePath=".\ui_addCourse_cop.h"
 				>
 			</File>

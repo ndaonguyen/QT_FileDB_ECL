@@ -51,9 +51,9 @@ public:
     {
         if (myclassClass->objectName().isEmpty())
             myclassClass->setObjectName(QString::fromUtf8("myclassClass"));
-        myclassClass->resize(931, 737);
-        myclassClass->setMinimumSize(QSize(931, 737));
-        myclassClass->setMaximumSize(QSize(931, 737));
+        myclassClass->resize(931, 680);
+        myclassClass->setMinimumSize(QSize(931, 680));
+        myclassClass->setMaximumSize(QSize(931, 700));
         QIcon icon;
         icon.addFile(QString::fromUtf8("../../../../../Dropbox/Eezy - Member/Eezy document/Design/website/Eezy - empty.png"), QSize(), QIcon::Normal, QIcon::Off);
         myclassClass->setWindowIcon(icon);
@@ -61,7 +61,7 @@ public:
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         mainTab = new QTabWidget(centralWidget);
         mainTab->setObjectName(QString::fromUtf8("mainTab"));
-        mainTab->setGeometry(QRect(10, 0, 901, 681));
+        mainTab->setGeometry(QRect(10, 0, 901, 631));
         listClassTab = new QWidget();
         listClassTab->setObjectName(QString::fromUtf8("listClassTab"));
         searchClassButton = new QPushButton(listClassTab);
@@ -72,7 +72,9 @@ public:
         searchClassLineEdit->setGeometry(QRect(20, 10, 201, 20));
         listClassTable = new QTableView(listClassTab);
         listClassTable->setObjectName(QString::fromUtf8("listClassTable"));
-        listClassTable->setGeometry(QRect(20, 50, 791, 611));
+        listClassTable->setGeometry(QRect(20, 50, 791, 560));
+        listClassTable->setMinimumSize(QSize(791, 560));
+        listClassTable->setMaximumSize(QSize(16777215, 560));
         refreshClassButton = new QPushButton(listClassTab);
         refreshClassButton->setObjectName(QString::fromUtf8("refreshClassButton"));
         refreshClassButton->setGeometry(QRect(760, 0, 51, 41));

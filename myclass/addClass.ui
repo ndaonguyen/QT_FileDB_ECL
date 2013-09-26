@@ -7,8 +7,20 @@
     <x>0</x>
     <y>0</y>
     <width>934</width>
-    <height>667</height>
+    <height>630</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>934</width>
+    <height>630</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>934</width>
+    <height>630</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Add Class</string>
@@ -180,7 +192,7 @@
      <x>480</x>
      <y>50</y>
      <width>411</width>
-     <height>561</height>
+     <height>531</height>
     </rect>
    </property>
    <widget class="QWidget" name="verticalLayoutWidget_4">
@@ -189,7 +201,7 @@
       <x>10</x>
       <y>20</y>
       <width>401</width>
-      <height>541</height>
+      <height>501</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="courseInfoLayout"/>
@@ -201,14 +213,14 @@
      <x>20</x>
      <y>260</y>
      <width>431</width>
-     <height>241</height>
+     <height>211</height>
     </rect>
    </property>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
       <x>100</x>
-      <y>210</y>
+      <y>180</y>
       <width>281</width>
       <height>16</height>
      </rect>
@@ -236,7 +248,7 @@
       <x>100</x>
       <y>30</y>
       <width>321</width>
-      <height>181</height>
+      <height>151</height>
      </rect>
     </property>
    </widget>
@@ -246,7 +258,7 @@
       <x>0</x>
       <y>0</y>
       <width>441</width>
-      <height>241</height>
+      <height>201</height>
      </rect>
     </property>
     <property name="title">
@@ -262,7 +274,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>519</y>
+     <y>479</y>
      <width>431</width>
      <height>101</height>
     </rect>
@@ -342,7 +354,7 @@
    <property name="geometry">
     <rect>
      <x>510</x>
-     <y>620</y>
+     <y>590</y>
      <width>221</width>
      <height>31</height>
     </rect>
@@ -391,7 +403,7 @@
      <x>450</x>
      <y>30</y>
      <width>20</width>
-     <height>591</height>
+     <height>561</height>
     </rect>
    </property>
    <property name="orientation">
@@ -402,7 +414,7 @@
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>620</y>
+     <y>590</y>
      <width>241</width>
      <height>31</height>
     </rect>
@@ -419,7 +431,7 @@
    <property name="geometry">
     <rect>
      <x>310</x>
-     <y>520</y>
+     <y>480</y>
      <width>141</width>
      <height>23</height>
     </rect>

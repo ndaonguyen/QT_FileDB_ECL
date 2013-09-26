@@ -2,7 +2,11 @@
 <courses>
 	<course>
 		<id>2</id>
-		<name>TOELF</name>
+		<name>TOELF edit</name>
+	</course>
+	<course>
+		<id>3</id>
+		<name>bum bunm</name>
 	</course>
 </courses>
 

@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>893</width>
-    <height>679</height>
+    <width>850</width>
+    <height>642</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>850</width>
+    <height>642</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>850</width>
+    <height>642</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Add Course</string>
@@ -29,8 +41,8 @@
   <widget class="QWidget" name="step1Widget" native="true">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>20</y>
+     <x>30</x>
+     <y>0</y>
      <width>381</width>
      <height>81</height>
     </rect>
@@ -80,6 +92,9 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="toolTip">
+     <string>save course name</string>
+    </property>
     <property name="text">
      <string/>
     </property>
@@ -98,10 +113,10 @@
   <widget class="QGroupBox" name="classInsertGroupBox">
    <property name="geometry">
     <rect>
-     <x>530</x>
+     <x>480</x>
      <y>10</y>
      <width>341</width>
-     <height>661</height>
+     <height>621</height>
     </rect>
    </property>
    <property name="toolTip">
@@ -140,7 +155,7 @@
       <x>50</x>
       <y>110</y>
       <width>261</width>
-      <height>491</height>
+      <height>471</height>
      </rect>
     </property>
     <widget class="QWidget" name="verticalLayoutWidget_2">
@@ -149,7 +164,7 @@
        <x>0</x>
        <y>10</y>
        <width>261</width>
-       <height>491</height>
+       <height>451</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="step2Layout"/>
@@ -159,7 +174,7 @@
     <property name="geometry">
      <rect>
       <x>190</x>
-      <y>620</y>
+      <y>590</y>
       <width>131</width>
       <height>23</height>
      </rect>
@@ -176,7 +191,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>620</y>
+      <y>590</y>
       <width>141</width>
       <height>23</height>
      </rect>
@@ -192,8 +207,8 @@
   <widget class="Line" name="line2_3">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>340</y>
+     <x>30</x>
+     <y>320</y>
      <width>381</width>
      <height>16</height>
     </rect>
@@ -205,8 +220,8 @@
   <widget class="Line" name="line1_2">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>120</y>
+     <x>30</x>
+     <y>100</y>
      <width>381</width>
      <height>16</height>
     </rect>
@@ -218,8 +233,8 @@
   <widget class="QWidget" name="step2Widget" native="true">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>140</y>
+     <x>30</x>
+     <y>120</y>
      <width>381</width>
      <height>191</height>
     </rect>
@@ -319,7 +334,7 @@
      </rect>
     </property>
     <property name="toolTip">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save skills&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>save skill</string>
     </property>
     <property name="text">
      <string/>
@@ -343,6 +358,9 @@
       <width>75</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="toolTip">
+     <string>add skill</string>
     </property>
     <property name="text">
      <string/>
@@ -385,33 +403,13 @@
     </property>
    </widget>
   </widget>
-  <widget class="QPushButton" name="addMoreButton">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>120</y>
-     <width>71</width>
-     <height>71</height>
-    </rect>
-   </property>
-   <property name="icon">
-    <iconset resource="myclass.qrc">
-     <normaloff>:/myclass/Resources/addIcon.jpg</normaloff>:/myclass/Resources/addIcon.jpg</iconset>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>60</width>
-     <height>60</height>
-    </size>
-   </property>
-  </widget>
   <widget class="QWidget" name="step3Widget" native="true">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>360</y>
+     <x>30</x>
+     <y>340</y>
      <width>381</width>
-     <height>311</height>
+     <height>281</height>
     </rect>
    </property>
    <widget class="QLabel" name="step2Label_2">
@@ -433,7 +431,7 @@
       <x>30</x>
       <y>30</y>
       <width>351</width>
-      <height>271</height>
+      <height>241</height>
      </rect>
     </property>
     <widget class="QWidget" name="verticalLayoutWidget_3">
@@ -442,7 +440,7 @@
        <x>0</x>
        <y>10</y>
        <width>351</width>
-       <height>261</height>
+       <height>221</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout"/>

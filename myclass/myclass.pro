@@ -17,7 +17,8 @@ HEADERS += database.h \
 		   addClass.h \
 		   addCourse.h \
 		   data_conf.h \
-		   ui_addCourse_cop.h
+		   ui_addCourse_cop.h \
+		   ui_addClass_cop.h
 FORMS += myclass.ui \
          addClass.ui \
 		 addCourse.ui

@@ -28,7 +28,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_widget
+class Ui_addClassWidget
 {
 public:
     QWidget *classAdd1Widget;
@@ -246,7 +246,7 @@ public:
 };
 
 namespace Ui {
-    class widget: public Ui_widget {};
+    class addClassWidget: public Ui_addClassWidget {};
 } // namespace Ui
 
 QT_END_NAMESPACE

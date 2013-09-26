@@ -7,19 +7,19 @@
     <x>0</x>
     <y>0</y>
     <width>931</width>
-    <height>737</height>
+    <height>680</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>931</width>
-    <height>737</height>
+    <height>680</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>931</width>
-    <height>737</height>
+    <height>700</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -36,7 +36,7 @@
       <x>10</x>
       <y>0</y>
       <width>901</width>
-      <height>681</height>
+      <height>631</height>
      </rect>
     </property>
     <property name="toolTip">
@@ -78,8 +78,20 @@
         <x>20</x>
         <y>50</y>
         <width>791</width>
-        <height>611</height>
+        <height>560</height>
        </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>791</width>
+        <height>560</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>560</height>
+       </size>
       </property>
      </widget>
      <widget class="QPushButton" name="refreshClassButton">

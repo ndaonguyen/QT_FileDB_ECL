@@ -3,7 +3,7 @@
 #include <QDialog>
 #include <QStandardItemModel>
 #include <QSignalMapper>
-#include "ui_addClass.h"
+#include "ui_addClass_cop.h"
 #include "data_conf.h"
 #include "databaseFile.h"
 
@@ -14,7 +14,7 @@ public:
 	AddClass( QWidget * parent = 0, Qt::WindowFlags f = 0, databaseFile *dbFile = 0, QString classID = 0);
 	~AddClass(void);
 private:
-	Ui::Form ui;
+	Ui::addClassWidget ui;
 private:
 	databaseFile *dbFile;
 

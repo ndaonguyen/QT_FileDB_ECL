@@ -10,6 +10,7 @@ AddCourse::AddCourse(QWidget * parent, Qt::WindowFlags f, databaseFile *dbFileOr
 		refreshToOriginAddCourse();
 	else
 	{
+		ui.saveButton->setVisible(false);
 		ui.cancelCourseButton->setVisible(false);
 		QList< QMap<QString,QString> > courseList = dbFile->getListByField("course","id",courseId);
 		courseName  = courseList.at(0)["name"];
@@ -18,7 +19,6 @@ AddCourse::AddCourse(QWidget * parent, Qt::WindowFlags f, databaseFile *dbFileOr
 		setup4Step2();
 		setup4Step3();
 		ui.step2Widget->setEnabled(false);
-		ui.addMoreButton->setVisible(false);
 	}
 }
 
@@ -33,8 +33,6 @@ AddCourse::~AddCourse(void)
 void AddCourse::setConnection()
 {
 	// add course
-    QObject::connect(ui.addMoreButton, SIGNAL(clicked()),
-		             this, SLOT(refreshAddCourseAction()));
     QObject::connect(ui.leftWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
 					this, SLOT(left2RightClickAction()));
     QObject::connect(ui.rightWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
@@ -228,7 +226,6 @@ void AddCourse:: setup4Step3() // Main step 3
 	ui.resultLabel->setText("<span style='color:blue'><b>Step2:saved</b></span>");
 
 	ui.saveCourseButton->setVisible(true);
-	ui.addMoreButton->setVisible(true);
 }
 
 QString AddCourse:: materialBox(QString skill,bool &ok)
@@ -292,7 +289,6 @@ void AddCourse:: loadConfigAddCourseTab()
 	ui.step2Widget->setVisible(false);
 	ui.step3Widget->setVisible(false);
 	ui.skillLabelShow->setVisible(false);
-	ui.addMoreButton->setVisible(false);
 	courseName = "";
 	courseID   = ADD_MODE_COURSE;
 	courseMode = CREATE_COURSE_MODE;

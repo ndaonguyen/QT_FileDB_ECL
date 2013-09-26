@@ -45,10 +45,6 @@
 		<member_id>17</member_id>
 	</class_member>
 	<class_member>
-		<class_id>1</class_id>
-		<member_id>18</member_id>
-	</class_member>
-	<class_member>
 		<class_id>7</class_id>
 		<member_id>19</member_id>
 	</class_member>
@@ -65,20 +61,28 @@
 		<member_id>22</member_id>
 	</class_member>
 	<class_member>
-		<class_id>8</class_id>
-		<member_id>23</member_id>
-	</class_member>
-	<class_member>
-		<class_id>8</class_id>
-		<member_id>24</member_id>
-	</class_member>
-	<class_member>
-		<class_id>8</class_id>
-		<member_id>25</member_id>
+		<class_id>1</class_id>
+		<member_id>26</member_id>
 	</class_member>
 	<class_member>
 		<class_id>1</class_id>
-		<member_id>26</member_id>
+		<member_id>27</member_id>
+	</class_member>
+	<class_member>
+		<class_id>1</class_id>
+		<member_id>29</member_id>
+	</class_member>
+	<class_member>
+		<class_id>8</class_id>
+		<member_id>30</member_id>
+	</class_member>
+	<class_member>
+		<class_id>8</class_id>
+		<member_id>31</member_id>
+	</class_member>
+	<class_member>
+		<class_id>8</class_id>
+		<member_id>32</member_id>
 	</class_member>
 </class_members>
 

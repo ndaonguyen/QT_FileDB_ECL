@@ -58,7 +58,6 @@ public:
     QPushButton *addSkill;
     QLabel *label;
     QLabel *label_2;
-    QPushButton *addMoreButton;
     QWidget *step3Widget;
     QLabel *step2Label_2;
     QWidget *verticalLayoutWidget;
@@ -70,13 +69,15 @@ public:
     {
         if (Form->objectName().isEmpty())
             Form->setObjectName(QString::fromUtf8("Form"));
-        Form->resize(893, 679);
+        Form->resize(850, 642);
+        Form->setMinimumSize(QSize(850, 642));
+        Form->setMaximumSize(QSize(850, 642));
         resultLabel = new QLabel(Form);
         resultLabel->setObjectName(QString::fromUtf8("resultLabel"));
         resultLabel->setGeometry(QRect(0, 240, 91, 41));
         step1Widget = new QWidget(Form);
         step1Widget->setObjectName(QString::fromUtf8("step1Widget"));
-        step1Widget->setGeometry(QRect(120, 20, 381, 81));
+        step1Widget->setGeometry(QRect(30, 0, 381, 81));
         step1Label = new QLabel(step1Widget);
         step1Label->setObjectName(QString::fromUtf8("step1Label"));
         step1Label->setGeometry(QRect(10, 20, 291, 16));
@@ -95,7 +96,7 @@ public:
         saveButton->setIconSize(QSize(18, 18));
         classInsertGroupBox = new QGroupBox(Form);
         classInsertGroupBox->setObjectName(QString::fromUtf8("classInsertGroupBox"));
-        classInsertGroupBox->setGeometry(QRect(530, 10, 341, 661));
+        classInsertGroupBox->setGeometry(QRect(480, 10, 341, 621));
         horizontalLayoutWidget = new QWidget(classInsertGroupBox);
         horizontalLayoutWidget->setObjectName(QString::fromUtf8("horizontalLayoutWidget"));
         horizontalLayoutWidget->setGeometry(QRect(20, 30, 261, 41));
@@ -107,36 +108,36 @@ public:
         skillLabelShow->setGeometry(QRect(20, 80, 46, 13));
         step2WidgetInfo = new QWidget(classInsertGroupBox);
         step2WidgetInfo->setObjectName(QString::fromUtf8("step2WidgetInfo"));
-        step2WidgetInfo->setGeometry(QRect(50, 110, 261, 491));
+        step2WidgetInfo->setGeometry(QRect(50, 110, 261, 471));
         verticalLayoutWidget_2 = new QWidget(step2WidgetInfo);
         verticalLayoutWidget_2->setObjectName(QString::fromUtf8("verticalLayoutWidget_2"));
-        verticalLayoutWidget_2->setGeometry(QRect(0, 10, 261, 491));
+        verticalLayoutWidget_2->setGeometry(QRect(0, 10, 261, 451));
         step2Layout = new QVBoxLayout(verticalLayoutWidget_2);
         step2Layout->setObjectName(QString::fromUtf8("step2Layout"));
         step2Layout->setContentsMargins(0, 0, 0, 0);
         cancelCourseButton = new QPushButton(classInsertGroupBox);
         cancelCourseButton->setObjectName(QString::fromUtf8("cancelCourseButton"));
-        cancelCourseButton->setGeometry(QRect(190, 620, 131, 23));
+        cancelCourseButton->setGeometry(QRect(190, 590, 131, 23));
         QIcon icon1;
         icon1.addFile(QString::fromUtf8(":/myclass/Resources/cancel_icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         cancelCourseButton->setIcon(icon1);
         saveCourseButton = new QPushButton(classInsertGroupBox);
         saveCourseButton->setObjectName(QString::fromUtf8("saveCourseButton"));
-        saveCourseButton->setGeometry(QRect(20, 620, 141, 23));
+        saveCourseButton->setGeometry(QRect(20, 590, 141, 23));
         saveCourseButton->setAutoFillBackground(true);
         line2_3 = new QFrame(Form);
         line2_3->setObjectName(QString::fromUtf8("line2_3"));
-        line2_3->setGeometry(QRect(120, 340, 381, 16));
+        line2_3->setGeometry(QRect(30, 320, 381, 16));
         line2_3->setFrameShape(QFrame::HLine);
         line2_3->setFrameShadow(QFrame::Sunken);
         line1_2 = new QFrame(Form);
         line1_2->setObjectName(QString::fromUtf8("line1_2"));
-        line1_2->setGeometry(QRect(120, 120, 381, 16));
+        line1_2->setGeometry(QRect(30, 100, 381, 16));
         line1_2->setFrameShape(QFrame::HLine);
         line1_2->setFrameShadow(QFrame::Sunken);
         step2Widget = new QWidget(Form);
         step2Widget->setObjectName(QString::fromUtf8("step2Widget"));
-        step2Widget->setGeometry(QRect(120, 140, 381, 191));
+        step2Widget->setGeometry(QRect(30, 120, 381, 191));
         step2Label = new QLabel(step2Widget);
         step2Label->setObjectName(QString::fromUtf8("step2Label"));
         step2Label->setGeometry(QRect(10, 20, 211, 16));
@@ -176,25 +177,18 @@ public:
         label_2 = new QLabel(step2Widget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setGeometry(QRect(260, 170, 71, 16));
-        addMoreButton = new QPushButton(Form);
-        addMoreButton->setObjectName(QString::fromUtf8("addMoreButton"));
-        addMoreButton->setGeometry(QRect(10, 120, 71, 71));
-        QIcon icon3;
-        icon3.addFile(QString::fromUtf8(":/myclass/Resources/addIcon.jpg"), QSize(), QIcon::Normal, QIcon::Off);
-        addMoreButton->setIcon(icon3);
-        addMoreButton->setIconSize(QSize(60, 60));
         step3Widget = new QWidget(Form);
         step3Widget->setObjectName(QString::fromUtf8("step3Widget"));
-        step3Widget->setGeometry(QRect(120, 360, 381, 311));
+        step3Widget->setGeometry(QRect(30, 340, 381, 281));
         step2Label_2 = new QLabel(step3Widget);
         step2Label_2->setObjectName(QString::fromUtf8("step2Label_2"));
         step2Label_2->setGeometry(QRect(10, 10, 131, 16));
         verticalLayoutWidget = new QWidget(step3Widget);
         verticalLayoutWidget->setObjectName(QString::fromUtf8("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(30, 30, 351, 271));
+        verticalLayoutWidget->setGeometry(QRect(30, 30, 351, 241));
         verticalLayoutWidget_3 = new QWidget(verticalLayoutWidget);
         verticalLayoutWidget_3->setObjectName(QString::fromUtf8("verticalLayoutWidget_3"));
-        verticalLayoutWidget_3->setGeometry(QRect(0, 10, 351, 261));
+        verticalLayoutWidget_3->setGeometry(QRect(0, 10, 351, 221));
         verticalLayout = new QVBoxLayout(verticalLayoutWidget_3);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
@@ -209,10 +203,13 @@ public:
 
     void retranslateUi(QWidget *Form)
     {
-        Form->setWindowTitle(QApplication::translate("Form", "Form", 0, QApplication::UnicodeUTF8));
+        Form->setWindowTitle(QApplication::translate("Form", "Add Course", 0, QApplication::UnicodeUTF8));
         resultLabel->setText(QString());
         step1Label->setText(QApplication::translate("Form", "<html><head/><body><p><span style=\" font-weight:600;\">Step 1 :Course name (e.g: Ielts, Toefl,...)</span></p></body></html>", 0, QApplication::UnicodeUTF8));
         setCourseLabel->setText(QApplication::translate("Form", "Set course name:", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        saveButton->setToolTip(QApplication::translate("Form", "save course name", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
         saveButton->setText(QString());
 #ifndef QT_NO_TOOLTIP
         classInsertGroupBox->setToolTip(QApplication::translate("Form", "Add skills", 0, QApplication::UnicodeUTF8));
@@ -227,9 +224,12 @@ public:
         all2RightButton->setText(QApplication::translate("Form", "all >>", 0, QApplication::UnicodeUTF8));
         all2LeftButton->setText(QApplication::translate("Form", "<< all", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
-        saveButton2->setToolTip(QApplication::translate("Form", "<html><head/><body><p>Save skills</p></body></html>", 0, QApplication::UnicodeUTF8));
+        saveButton2->setToolTip(QApplication::translate("Form", "save skill", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
         saveButton2->setText(QString());
+#ifndef QT_NO_TOOLTIP
+        addSkill->setToolTip(QApplication::translate("Form", "add skill", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
         addSkill->setText(QString());
         label->setText(QApplication::translate("Form", "Skill list", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("Form", "course's skill", 0, QApplication::UnicodeUTF8));

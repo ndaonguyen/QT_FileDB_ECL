@@ -325,7 +325,7 @@ void AddCourse:: refreshToOriginAddCourse()
 		ui.rightWidget->takeItem(0);
 
 	courseName = "";
-	courseID   = 0;
+	courseID   = ADD_MODE_COURSE;
 	courseMode = CREATE_COURSE_MODE;
 	skillsCourse.clear();
 	skillWidgets.clear();
@@ -520,37 +520,13 @@ void AddCourse:: saveCourseAction()
 	if(courseMode == EDIT_COURSE_MODE)
 		step1SaveAction();
 	close();
-/*
-	QWidget * tab = ui.mainTab->widget(ADD_CLASS_TAB);
-	ui.mainTab->setCurrentWidget(tab);
-*/
-//	refreshToOriginAddCourse();
-	// load course list
-//	loadListCourseTab();
-//	loadListClassTab();
-/*
-	ui.mainTab->setTabEnabled(LIST_CLASS_TAB  , true);
-	ui.mainTab->setTabEnabled(ADD_CLASS_TAB   , false);
-	ui.mainTab->setTabEnabled(LIST_COURSE_TAB , true);
-	ui.mainTab->setTabEnabled(ADD_COURSE_TAB  , false);
-*/
 }
 
 void AddCourse:: cancelCourseAction()
 {
-	/*
-	ui.mainTab->setTabEnabled(0,true);
-	ui.mainTab->setTabEnabled(1,false);
-	ui.mainTab->setTabEnabled(2,true);
-	ui.mainTab->setTabEnabled(3,false);
-
-	QWidget * tab = ui.mainTab->widget(2);
-	ui.mainTab->setCurrentWidget(tab);
-*/
 	if(courseMode == CREATE_COURSE_MODE && courseID != ADD_MODE_COURSE)
 		deleteCourse(QString::number(courseID));
 	close();
-//	refreshToOriginAddCourse();	
 }
 
 

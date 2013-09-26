@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>widget</class>
+ <widget class="QWidget" name="widget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Add Class</string>
   </property>
   <widget class="QWidget" name="classAdd1Widget" native="true">
    <property name="geometry">
@@ -433,6 +433,20 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>classNameLineEdit</tabstop>
+  <tabstop>regisdateEdit</tabstop>
+  <tabstop>totalDateLineEdit</tabstop>
+  <tabstop>otherLineEdit</tabstop>
+  <tabstop>addMemberTable</tabstop>
+  <tabstop>courseComboBox</tabstop>
+  <tabstop>saveButton_2</tabstop>
+  <tabstop>cancelButton</tabstop>
+  <tabstop>enableClass1Button</tabstop>
+  <tabstop>enableClass2Button</tabstop>
+  <tabstop>enableClass3Button</tabstop>
+  <tabstop>dayUseSpinBox</tabstop>
+ </tabstops>
  <resources>
   <include location="myclass.qrc"/>
  </resources>

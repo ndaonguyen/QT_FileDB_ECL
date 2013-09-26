@@ -336,8 +336,11 @@ void MyClass:: loadListCourseTab()
 
 void MyClass:: refreshAddClassAction()
 {
+	this->setEnabled(false);
 	AddClass *addClassDialog = new AddClass(0,0, dbFile, ADD_MODE_CLASS); ;
 	addClassDialog->exec();
+	this->setEnabled(true);
+	
 	ui.searchClassLineEdit->setText("");
 	loadListClassTab();
 }
@@ -346,8 +349,11 @@ void MyClass:: refreshAddClassAction()
 // ----------- ADD COURSE TAB 
 void MyClass:: refreshAddCourseAction()
 {
+	this->setEnabled(false);
 	AddCourse *addCourseDialog = new AddCourse(0,0, dbFile, ADD_MODE_COURSE);
 	addCourseDialog->exec();
+	this->setEnabled(true);
+
 	loadListCourseTab();
 	ui.searchCourseLineEdit->setText("");
 
@@ -382,8 +388,10 @@ void MyClass:: loadCourseDialogAction(QString courseId)
 
 void MyClass:: editCourseAction(QString courseId)
 {
+	this->setEnabled(false);
 	AddCourse *addCourseDialog = new AddCourse(0,0, dbFile, courseId); ;
 	addCourseDialog->exec();
+	this->setEnabled(true);
 	loadListCourseTab();
 	ui.searchCourseLineEdit->setText("");
 }
@@ -446,8 +454,10 @@ void MyClass:: detailMemberAction(QString classId)
 
 void MyClass:: editClassAction(QString classId)
 {
+	this->setEnabled(false);
 	AddClass *addClassDialog = new AddClass(0,0, dbFile, classId); ;
 	addClassDialog->exec();
+	this->setEnabled(true);
 	loadListClassTab();
 	ui.searchClassLineEdit->setText("");
 }
